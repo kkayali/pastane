@@ -16,7 +16,7 @@ const featuredCollections = [
     title: "Pastalar",
     image: "/images/menu/pastalar/meyvelipasta1.jpeg",
     href: "/menu/pastalar",
-    text: "Günlük tüketimden kutlama pastalarına uzanan seçili pasta çeşitleri.",
+    text: "Günlük tüketimden kutlama pastlarına uzanan lezzet.",
   },
   {
     title: "Düğün & Nişan",
