@@ -84,65 +84,65 @@ export default function Navbar() {
     setMobileMenuOpen(false);
   };
 
+  // BURASI GÜNCELLENDİ: whitespace-nowrap eklendi, padding ve fontlar responsive yapıldı
+  const navBase =
+    "whitespace-nowrap inline-flex items-center justify-center min-h-[54px] xl:min-h-[62px] rounded-full px-5 xl:px-6 2xl:px-9 text-[14px] xl:text-[15.5px] font-medium tracking-[0.01em] transition-all duration-300";
+  
+  const navState = (active: boolean) =>
+    active
+      ? "bg-[#F8ECDD] text-[#5B3119] shadow-[0_10px_24px_rgba(0,0,0,0.14)]"
+      : "text-[#FFF7EF] hover:bg-white/12 hover:text-white";
+
   return (
     <>
       <header className="sticky top-0 z-50 w-full px-3 pt-3 sm:px-4 sm:pt-4">
         <div
-          className={`relative mx-auto w-full max-w-[1680px] overflow-visible rounded-[28px] border border-white/10 bg-[#3D1C08] transition-all duration-300 ${
+          className={`relative mx-auto w-full max-w-[1760px] overflow-visible border border-[rgba(255,255,255,0.08)] bg-[#3D1C08] transition-all duration-300 ${
             isScrolled
-              ? "shadow-lg shadow-black/20"
-              : "shadow-2xl shadow-black/30"
+              ? "shadow-[0_14px_34px_rgba(0,0,0,0.18)]"
+              : "shadow-[0_22px_52px_rgba(0,0,0,0.24)]"
           }`}
+          style={{ borderRadius: "0px" }}
         >
-          {/* HATA BURADA ÇÖZÜLDÜ: px-5 sm:px-8 yerine py-2 pr-2 pl-5 sm:pr-3 sm:pl-8 yapıldı. Butonların sağa çarpması engellendi. */}
-          <div className={`relative flex w-full items-center justify-between pl-5 pr-2 py-2 sm:pl-8 sm:pr-3 transition-all duration-300 ${
-            isScrolled ? 'min-h-[76px]' : 'min-h-[90px]'
-          }`}>
-            {/* Logo */}
+          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.03)_0%,transparent_18%,transparent_82%,rgba(255,255,255,0.03)_100%)]" />
+
+          <div
+            className={`relative mx-auto flex w-full items-center justify-between px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-12 transition-all duration-300 ${
+              isScrolled ? "min-h-[84px]" : "min-h-[98px]"
+            }`}
+          >
             <Link
               href="/"
               onClick={closeAllMenus}
-              className="group z-10 flex shrink-0 items-center"
+              className="z-10 flex shrink-0 items-center"
               aria-label={siteConfig.name}
             >
               <div
-                className={`relative flex items-center justify-center transition-transform duration-300 ${
-                  isScrolled ? "scale-[0.92]" : "scale-100"
+                className={`transition-transform duration-300 ${
+                  isScrolled ? "scale-[0.94]" : "scale-100"
                 }`}
               >
                 <Image
                   src="/logo/logo.png"
                   alt={siteConfig.name}
-                  width={180}
-                  height={60}
+                  width={190}
+                  height={62}
                   priority
-                  className="h-auto w-[140px] object-contain sm:w-[160px]"
+                  className="h-auto w-[136px] object-contain sm:w-[150px] lg:w-[165px] xl:w-[178px]"
                 />
               </div>
             </Link>
 
-            {/* Masaüstü Menü */}
-            <nav className="hidden items-center gap-1 lg:gap-3 xl:flex">
-              {mainLinks.slice(0, 1).map((link) => {
-                const active = isActive(pathname, link.href);
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={closeAllMenus}
-                    style={{ color: active ? '#5C3218' : '#FFF8F0' }} 
-                    className={`relative inline-flex min-h-[44px] items-center rounded-full px-4 lg:px-5 text-[14.5px] lg:text-[15px] font-medium tracking-wide transition-all duration-300 ${
-                      active
-                        ? "bg-[#FDF3E7] shadow-md"
-                        : "hover:bg-white/10"
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                );
-              })}
+            {/* BURASI GÜNCELLENDİ: gap artırıldı ve ml-auto ile sağa yaslandı */}
+            <nav className="hidden items-center ml-auto xl:flex gap-4 xl:gap-6 2xl:gap-8">
+              <Link
+                href="/"
+                onClick={closeAllMenus}
+                className={`${navBase} ${navState(isActive(pathname, "/"))}`}
+              >
+                Ana Sayfa
+              </Link>
 
-              {/* Mega Menü Dropdown Container */}
               <div
                 ref={desktopMenuRef}
                 className="relative"
@@ -152,44 +152,50 @@ export default function Navbar() {
                 <button
                   type="button"
                   onClick={() => setMenuOpen((prev) => !prev)}
-                  style={{ color: menuActive || menuOpen ? '#5C3218' : '#FFF8F0' }} 
-                  className={`inline-flex min-h-[44px] items-center gap-2 rounded-full px-4 lg:px-5 text-[14.5px] lg:text-[15px] font-medium tracking-wide transition-all duration-300 ${
+                  className={`${navBase} ${navState(
                     menuActive || menuOpen
-                      ? "bg-[#FDF3E7] shadow-md"
-                      : "hover:bg-white/10"
-                  }`}
+                  )} gap-2.5`}
                   aria-expanded={menuOpen}
+                  aria-haspopup="true"
                 >
                   Menü
                   <ChevronDown
-                    size={16}
+                    size={18}
                     className={`transition-transform duration-300 ${
                       menuOpen ? "rotate-180" : ""
                     }`}
                   />
                 </button>
 
-                {/* Mega Menü İçeriği */}
                 <div
-                  className={`absolute right-0 z-[100] pt-6 transition-all duration-300 w-[700px] max-w-[calc(100vw-2rem)] origin-top-right ${
+                  className={`absolute right-0 top-full z-[100] w-[760px] max-w-[calc(100vw-32px)] origin-top-right pt-5 transition-all duration-300 ${
                     menuOpen
-                      ? "pointer-events-auto visible translate-y-0 opacity-100 scale-100"
-                      : "pointer-events-none invisible -translate-y-3 opacity-0 scale-95"
+                      ? "pointer-events-auto visible translate-y-0 opacity-100"
+                      : "pointer-events-none invisible -translate-y-3 opacity-0"
                   }`}
                 >
-                  <div className="overflow-hidden rounded-[28px] border border-[#EBE1D5] bg-[#FCFAF7] shadow-2xl shadow-black/25">
-                    <div className="w-full p-8">
-                      <div className="mb-6 flex items-center justify-between border-b border-[#EBE1D5]/60 pb-4">
+                  <div className="overflow-hidden border border-[#E9DED1] bg-[#FCFAF7] shadow-[0_28px_70px_rgba(0,0,0,0.18)]">
+                    <div className="p-8">
+                      <div className="mb-6 flex items-center justify-between border-b border-[#E9DED1] pb-4">
                         <div>
-                          <p className="font-serif text-[22px] font-bold text-[#4A2411]">Ürün Menüsü</p>
+                          <p className="font-serif text-[24px] font-bold text-[#4A2411]">
+                            Ürün Menüsü
+                          </p>
+                          <p className="mt-1 text-[13px] text-[#8A6A54]">
+                            Ana kategoriler ve alt ürün grupları
+                          </p>
                         </div>
+
                         <Link
                           href="/tum-urunler"
                           onClick={closeAllMenus}
-                          className="group flex items-center gap-1.5 rounded-full px-4 py-2 text-[14px] font-semibold text-[#A25F2D] transition hover:bg-[#F6EDE4]"
+                          className="group inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[14px] font-semibold text-[#A25F2D] transition hover:bg-[#F6EDE4]"
                         >
                           Tüm Ürünleri Gör
-                          <ArrowUpRight size={16} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                          <ArrowUpRight
+                            size={16}
+                            className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                          />
                         </Link>
                       </div>
 
@@ -197,27 +203,28 @@ export default function Navbar() {
                         {menuCategories.map((category) => (
                           <div
                             key={category.slug}
-                            className="group flex flex-col rounded-2xl border border-[#EBE1D5]/50 bg-white p-5 shadow-sm transition-all hover:border-[#C27E48]/40 hover:shadow-md"
+                            className="group border border-[#EEE4D8] bg-white p-5 shadow-[0_6px_18px_rgba(0,0,0,0.04)] transition-all duration-300 hover:border-[#D7B292] hover:shadow-[0_12px_28px_rgba(0,0,0,0.07)]"
                           >
                             <Link
                               href={`/menu/${category.slug}`}
                               onClick={closeAllMenus}
-                              className="block font-serif text-[18px] font-bold text-[#4A2411] transition-colors group-hover:text-[#A25F2D]"
+                              className="block font-serif text-[20px] font-bold leading-tight text-[#4A2411] transition-colors group-hover:text-[#A25F2D]"
                             >
                               {category.title}
                             </Link>
-                            <ul className="mt-4 flex flex-col gap-1">
+
+                            <ul className="mt-4 flex flex-col gap-1.5">
                               {category.subcategories.map((sub) => (
                                 <li key={sub.slug}>
                                   <Link
                                     href={`/menu/${category.slug}/${sub.slug}`}
                                     onClick={closeAllMenus}
-                                    className="flex items-center justify-between rounded-lg py-2 px-2 text-[14px] font-medium text-[#7D5B43] transition-colors hover:bg-[#FDF3E7] hover:text-[#5C3218]"
+                                    className="flex items-center justify-between px-2 py-2 text-[14px] font-medium text-[#735540] transition-colors hover:bg-[#FDF3E7] hover:text-[#5C3218]"
                                   >
                                     <span>{sub.title}</span>
                                     <ChevronRight
                                       size={14}
-                                      className="text-[#C27E48] opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100"
+                                      className="opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100"
                                     />
                                   </Link>
                                 </li>
@@ -231,7 +238,6 @@ export default function Navbar() {
                 </div>
               </div>
 
-              {/* Diğer Linkler */}
               {mainLinks.slice(1).map((link) => {
                 const active = isActive(pathname, link.href);
                 return (
@@ -239,34 +245,27 @@ export default function Navbar() {
                     key={link.href}
                     href={link.href}
                     onClick={closeAllMenus}
-                    style={{ color: active ? '#5C3218' : '#FFF8F0' }} 
-                    className={`relative inline-flex min-h-[44px] items-center rounded-full px-4 lg:px-5 text-[14.5px] lg:text-[15px] font-medium tracking-wide transition-all duration-300 ${
-                      active
-                        ? "bg-[#FDF3E7] shadow-md"
-                        : "hover:bg-white/10"
-                    }`}
+                    className={`${navBase} ${navState(active)}`}
                   >
                     {link.label}
                   </Link>
                 );
               })}
 
-              {/* Hemen Ara Butonu */}
+              {/* BURASI GÜNCELLENDİ: whitespace-nowrap eklendi, min-h ve padding ekran boyutlarına göre ayarlandı */}
               <a
                 href={`tel:${siteConfig.phone}`}
-                className="ml-2 inline-flex min-h-[48px] lg:min-h-[50px] items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#C27E48] to-[#9F5D2A] px-6 lg:px-7 text-[14.5px] lg:text-[15px] font-semibold text-white shadow-lg transition-transform hover:-translate-y-0.5 hover:shadow-xl"
+                className="ml-2 whitespace-nowrap inline-flex min-h-[54px] xl:min-h-[62px] items-center justify-center gap-2.5 rounded-full bg-[linear-gradient(135deg,#C98245_0%,#A45D2A_100%)] px-5 xl:px-6 2xl:px-9 text-[14px] xl:text-[15.5px] font-semibold text-white shadow-[0_14px_28px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_34px_rgba(0,0,0,0.22)]"
               >
                 <Phone size={18} />
-                <span className="hidden lg:inline">Hemen Ara</span>
-                <span className="lg:hidden">Ara</span>
+                Hemen Ara
               </a>
             </nav>
 
-            {/* Mobil Menü Tetikleyiciler */}
-            <div className="flex items-center gap-2 sm:gap-3 xl:hidden">
+            <div className="flex items-center gap-3 xl:hidden">
               <a
                 href={`tel:${siteConfig.phone}`}
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-r from-[#C27E48] to-[#9F5D2A] text-white shadow-md"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[linear-gradient(135deg,#C98245_0%,#A45D2A_100%)] text-white shadow-md"
                 aria-label="Hemen Ara"
               >
                 <Phone size={18} />
@@ -285,16 +284,17 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Mobil Overlay ve Panel Kodları (Burası aynı kalıyor) */}
       <div
         className={`fixed inset-0 z-[80] bg-[#1A0C05]/60 backdrop-blur-sm transition-opacity duration-300 xl:hidden ${
-          mobileOpen ? "pointer-events-auto visible opacity-100" : "pointer-events-none invisible opacity-0"
+          mobileOpen
+            ? "pointer-events-auto visible opacity-100"
+            : "pointer-events-none invisible opacity-0"
         }`}
         onClick={closeMobileMenu}
       />
 
       <div
-        className={`fixed right-0 top-0 z-[90] h-full w-full max-w-[360px] overflow-y-auto bg-[#FCFAF7] shadow-2xl transition-transform duration-300 xl:hidden ${
+        className={`fixed right-0 top-0 z-[90] h-full w-full max-w-[380px] overflow-y-auto bg-[#FCFAF7] shadow-2xl transition-transform duration-300 xl:hidden ${
           mobileOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -310,7 +310,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={closeMobileMenu}
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#4A2411] shadow-sm border border-[#EBE1D5] transition-transform hover:rotate-90 hover:bg-[#F6EDE4]"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-[#EBE1D5] bg-white text-[#4A2411] shadow-sm transition-transform hover:rotate-90 hover:bg-[#F6EDE4]"
             aria-label="Kapat"
           >
             <X size={20} />
@@ -325,7 +325,7 @@ export default function Navbar() {
               className={`flex items-center justify-between rounded-xl p-4 text-[16px] font-semibold transition-colors ${
                 isActive(pathname, "/")
                   ? "bg-[#FDF3E7] text-[#5C3218]"
-                  : "bg-white text-[#4A2411] border border-[#EBE1D5] shadow-sm hover:bg-[#F6EDE4]"
+                  : "border border-[#EBE1D5] bg-white text-[#4A2411] shadow-sm hover:bg-[#F6EDE4]"
               }`}
             >
               Ana Sayfa
@@ -338,7 +338,7 @@ export default function Navbar() {
               className={`flex w-full items-center justify-between rounded-xl p-4 text-left text-[16px] font-semibold transition-colors ${
                 menuActive || mobileMenuOpen
                   ? "bg-[#FDF3E7] text-[#5C3218]"
-                  : "bg-white text-[#4A2411] border border-[#EBE1D5] shadow-sm hover:bg-[#F6EDE4]"
+                  : "border border-[#EBE1D5] bg-white text-[#4A2411] shadow-sm hover:bg-[#F6EDE4]"
               }`}
             >
               Ürün Menüsü
@@ -350,10 +350,11 @@ export default function Navbar() {
               />
             </button>
 
-            {/* Mobil Alt Kategoriler */}
             <div
               className={`overflow-hidden transition-all duration-300 ${
-                mobileMenuOpen ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
+                mobileMenuOpen
+                  ? "max-h-[2000px] opacity-100"
+                  : "max-h-0 opacity-0"
               }`}
             >
               <div className="mt-2 space-y-4 rounded-xl border border-[#EBE1D5]/60 bg-white p-5 shadow-sm">
@@ -366,7 +367,10 @@ export default function Navbar() {
                 </Link>
 
                 {menuCategories.map((category) => (
-                  <div key={category.slug} className="pt-3 border-t border-[#EBE1D5] first:border-0 first:pt-0">
+                  <div
+                    key={category.slug}
+                    className="border-t border-[#EBE1D5] pt-3 first:border-0 first:pt-0"
+                  >
                     <Link
                       href={`/menu/${category.slug}`}
                       onClick={closeAllMenus}
@@ -380,7 +384,7 @@ export default function Navbar() {
                           key={sub.slug}
                           href={`/menu/${category.slug}/${sub.slug}`}
                           onClick={closeAllMenus}
-                          className="rounded-full bg-[#F6EDE4] border border-[#EBE1D5] px-4 py-2 text-[13px] font-medium text-[#5C3218] transition-colors hover:bg-[#C27E48] hover:text-white"
+                          className="rounded-full border border-[#EBE1D5] bg-[#F6EDE4] px-4 py-2 text-[13px] font-medium text-[#5C3218] transition-colors hover:bg-[#C27E48] hover:text-white"
                         >
                           {sub.title}
                         </Link>
@@ -399,7 +403,7 @@ export default function Navbar() {
                 className={`flex items-center justify-between rounded-xl p-4 text-[16px] font-semibold transition-colors ${
                   isActive(pathname, link.href)
                     ? "bg-[#FDF3E7] text-[#5C3218]"
-                    : "bg-white text-[#4A2411] border border-[#EBE1D5] shadow-sm hover:bg-[#F6EDE4]"
+                    : "border border-[#EBE1D5] bg-white text-[#4A2411] shadow-sm hover:bg-[#F6EDE4]"
                 }`}
               >
                 {link.label}
