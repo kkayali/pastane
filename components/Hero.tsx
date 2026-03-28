@@ -53,7 +53,7 @@ export default function Hero() {
 
             {/* BAŞLIK DÜZELTİLDİ: Kelimeler mantıklı bölündü ve max-w kısıtlaması kaldırıldı */}
             <h1 className="mt-4 font-title text-[3.15rem] leading-[1.05] tracking-[-0.04em] text-[var(--primary-dark)] sm:text-[4.2rem] lg:text-[5rem]">
-              Her gün taze hazırlanan
+              EROL SARİİİİİİİİİİİ 313131
               <br />
               lezzetler
             </h1>
