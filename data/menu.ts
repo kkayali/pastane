@@ -74,7 +74,7 @@ export const menuCategories: MenuCategory[] = [
         images: [
           "/images/menu/pastalar/cikolataframbuazgunlukpasta.jpeg",
           "/images/menu/pastalar/cikolatagunluk.jpeg",
-          "/images/menu/pastalar/cikolatalıcileklipastagunluk.jpeg",
+          "/images/menu/pastalar/cikolatalicileklipastagunluk.jpeg",
           "/images/menu/pastalar/cikolatalipastagunluk.jpeg",
           "/images/menu/pastalar/cikolatamuzlupastagunluk.jpeg",
           "/images/menu/pastalar/cileklipastagunluk.jpeg",
