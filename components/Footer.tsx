@@ -65,7 +65,7 @@ export default function Footer() {
 
                   {/* Metin tekrarı giderildi */}
                   <p className="mt-6 text-[15px] leading-relaxed text-white/80">
-                    1980’den beri Akyazı’da günlük üretim, özenli sunum ve özel gün siparişlerinizde güven veren lezzetler hazırlıyoruz. Kaliteden ödün vermeden, her gün aynı taptaze heyecanla hizmetinizdeyiz.
+                    1970’den beri Akyazı’da günlük üretim, özenli sunum ve özel gün siparişlerinizde güven veren lezzetler hazırlıyoruz. Kaliteden ödün vermeden, her gün aynı taptaze heyecanla hizmetinizdeyiz.
                   </p>
                 </div>
 

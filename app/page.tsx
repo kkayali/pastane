@@ -33,7 +33,7 @@ const featuredCollections = [
 ];
 
 const trustItems = [
-  "1980’den bu yana süregelen üretim tecrübesi",
+  "1970’den bu yana süregelen üretim tecrübesi",
   "Günlük taze üretim anlayışı",
   "Özel gün siparişlerinde özenli hazırlık",
   "Hijyen ve müşteri memnuniyeti odaklı yaklaşım",
@@ -184,7 +184,7 @@ export default function Home() {
                 </h2>
 
                 <p className="mt-6 max-w-[44ch] text-[16px] leading-[1.9] text-[var(--text-soft)] sm:text-[17.5px]">
-                  1980’den bu yana üretim kültürünü sürdüren Sarılar Unlu
+                  1970’den bu yana üretim kültürünü sürdüren Sarılar Unlu
                   Mamüller; pasta, tatlı ve fırın ürünlerinde günlük tazelik,
                   özenli hazırlık ve zarif sunum anlayışını bir araya getirir.
                 </p>

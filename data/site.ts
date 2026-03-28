@@ -19,7 +19,7 @@ export const siteConfig = {
     "Tatlıdan pastaya, sütlü lezzetlerden özel gün siparişlerine kadar uzanan ürün çeşitliliğimizle Akyazı’da güven veren, özenli ve sıcak bir pastane deneyimi sunuyoruz.",
 
   aboutShort:
-    "1980’den bu yana üretim kültürünü sürdüren Sarılar Unlu Mamüller; günlük taze ürün anlayışı, özenli sunumu ve müşteri memnuniyetine verdiği önemle Akyazı’da güven veren bir lezzet noktasıdır.",
+    "1970’den bu yana üretim kültürünü sürdüren Sarılar Unlu Mamüller; günlük taze ürün anlayışı, özenli sunumu ve müşteri memnuniyetine verdiği önemle Akyazı’da güven veren bir lezzet noktasıdır.",
 
   workingHours: [
     "Pazartesi - Cumartesi: 07:00 - 22:00",

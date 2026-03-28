@@ -37,7 +37,7 @@ export default function HakkimizdaPage() {
               </div>
 
               <h1 className="mt-4 font-title text-[2.8rem] leading-[1.05] tracking-[-0.02em] text-[var(--primary-dark)] text-balance sm:text-[3.8rem] lg:text-[4.5rem]">
-                1980’den bugüne uzanan lezzet yolculuğu
+                1970’den bugüne uzanan lezzet yolculuğu
               </h1>
 
               <p className="mt-8 max-w-[36rem] text-[15.5px] leading-[1.8] text-[var(--text-soft)] sm:text-[17px]">
@@ -111,7 +111,7 @@ export default function HakkimizdaPage() {
             {/* Sağ Taraf (Ferah Paragraflar) */}
             <div className="flex flex-col space-y-10 lg:pt-14">
               <p className="text-[16.5px] leading-[1.9] text-[var(--text-soft)] sm:text-[18px]">
-                Sarılar Unlu Mamüller’in temelleri 1980 yılında atılmış,
+                Sarılar Unlu Mamüller’in temelleri 1970 yılında atılmış,
                 yıllar içinde edinilen üretim disiplini ve tecrübe bugünkü
                 güçlü yapısına dönüşmüştür. İlk günden bu yana değişmeyen
                 anlayışımız; kaliteli ürün, düzenli üretim ve güven veren

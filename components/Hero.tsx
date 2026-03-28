@@ -13,7 +13,7 @@ const slides = [
 ].filter(Boolean);
 
 const heroFacts = [
-  "1980’den beri üretim",
+  "1970’den beri üretim",
   "Günlük taze hazırlık",
   "Özel gün siparişleri",
 ];
