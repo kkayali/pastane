@@ -43,7 +43,6 @@ const whatsappMessage = encodeURIComponent(
   "Merhaba, ürünleriniz hakkında bilgi almak ve sipariş vermek istiyorum."
 );
 
-// Framer Motion Animasyon Varyantları
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   show: {
@@ -82,7 +81,6 @@ export default function Home() {
     <>
       <JsonLd data={jsonLd} />
       
-      {/* HERO BÖLÜMÜ */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -91,7 +89,6 @@ export default function Home() {
         <Hero />
       </motion.div>
 
-      {/* ANA KATEGORİLER BÖLÜMÜ */}
       <section className="section pt-10 sm:pt-14">
         <div className="container-custom">
           <motion.div
@@ -132,17 +129,17 @@ export default function Home() {
                   </div>
 
                   <div className="p-7 text-center sm:p-8">
-                    <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-[#3D1C08]/70">
+                    <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-[#3E1F10]/70">
                       Ana kategori
                     </p>
-                    <h2 className="mt-3 font-title text-[1.9rem] font-bold leading-none text-[#3D1C08] sm:text-[2.1rem]">
+                    <h2 className="mt-3 font-title text-[1.9rem] font-bold leading-none text-[#3E1F10] sm:text-[2.1rem]">
                       {item.title}
                     </h2>
-                    <p className="mt-4 text-[15px] font-medium leading-relaxed text-[#3D1C08]/80">
+                    <p className="mt-4 text-[15px] font-medium leading-relaxed text-[#3E1F10]/80">
                       {item.text}
                     </p>
 
-                    <div className="mt-6 inline-flex items-center gap-2 text-[14px] font-bold text-[#3D1C08] transition-transform group-hover:translate-x-1">
+                    <div className="mt-6 inline-flex items-center gap-2 text-[14px] font-bold text-[#3E1F10] transition-transform group-hover:translate-x-1">
                       İncele
                       <ArrowRight size={16} />
                     </div>
@@ -156,7 +153,7 @@ export default function Home() {
 
       <EditorialShowcase />
 
-      {/* ELİT HAKKIMIZDA & HARİTA BÖLÜMÜ */}
+      {/* KESİN ÇÖZÜM BÖLÜMÜ */}
       <motion.section 
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -165,45 +162,53 @@ export default function Home() {
         className="section-sm pt-16 pb-24 sm:pt-24 sm:pb-32"
       >
         <div className="container-custom">
+          
           {/* Ana Kapsayıcı */}
-          <div className="relative overflow-hidden rounded-[40px] bg-[#FCFAF7] p-6 sm:p-12 lg:p-14 xl:p-16 shadow-[0_10px_40px_rgba(61,28,8,0.06)] border border-[#EBE1D5]">
+          <div className="relative rounded-[40px] bg-[#FCFAF7] p-6 sm:p-10 lg:p-14 xl:p-16 shadow-sm border border-[#EBE1D5]">
             
-            {/* Işık Efektleri */}
-            <div className="pointer-events-none absolute -left-20 top-0 h-96 w-96 rounded-full bg-[#3D1C08] blur-[140px] opacity-[0.04]" />
-            <div className="pointer-events-none absolute -right-20 bottom-0 h-96 w-96 rounded-full bg-[#3D1C08] blur-[140px] opacity-[0.04]" />
+            {/* Dekoratif arka plan ışıkları */}
+            <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[40px]">
+               <div className="absolute -left-20 top-0 h-96 w-96 rounded-full bg-[#3E1F10] blur-[140px] opacity-[0.03]" />
+               <div className="absolute -right-20 bottom-0 h-96 w-96 rounded-full bg-[#3E1F10] blur-[140px] opacity-[0.03]" />
+            </div>
 
-            {/* Geniş gap'li grid */}
-            <div className="relative grid items-start gap-12 lg:grid-cols-[1fr_1fr] xl:gap-20">
+            {/* İki sütunlu basit grid. Asla taşmaz. */}
+            <div className="relative z-10 grid gap-10 lg:grid-cols-2 lg:gap-14 items-center">
               
-              {/* SOL TARAF - Metinler ve İçerik */}
+              {/* SOL TARAF: Yazılar */}
               <div className="flex flex-col">
                 <div className="mb-4">
-                  <ScriptText className="text-[2.2rem] text-[#3D1C08]/80 sm:text-[2.6rem]">
+                  <ScriptText className="text-[2rem] text-[#3E1F10]/80 sm:text-[2.4rem]">
                     Bize Ulaşın
                   </ScriptText>
                 </div>
 
-                <h2 className="font-title text-[2.4rem] leading-[1.15] tracking-tight text-[#3D1C08] sm:text-[2.8rem] lg:text-[3rem]">
+                <h2 className="font-title text-[2.2rem] leading-[1.15] tracking-tight text-[#3E1F10] sm:text-[2.6rem] lg:text-[2.8rem]">
                   Akyazı’da günlük üretim, şık sunum, gerçek lezzet
                 </h2>
 
-                <p className="mt-6 text-[16px] leading-[1.9] text-[#3D1C08]/80 sm:text-[17px]">
+                <p className="mt-5 text-[15px] leading-[1.8] text-[#3E1F10]/80 sm:text-[16px]">
                   1970’den bu yana üretim kültürünü sürdüren Sarılar Unlu
                   Mamüller; pasta, tatlı ve fırın ürünlerinde günlük tazelik,
                   özenli hazırlık ve zarif sunum anlayışını bir araya getirir.
                 </p>
 
-                {/* RADİKAL ÇÖZÜM 1: Yazı Rengini span ile çiviledik! */}
-                <div className="mt-10 flex flex-col sm:flex-row gap-4">
-                  <Link href="/menu" className="flex min-h-[56px] w-full sm:w-auto items-center justify-center rounded-full bg-[#3D1C08] px-10 transition-all hover:scale-[1.02]">
-                    <span style={{ color: '#FFFFFF', fontWeight: 'bold', fontSize: '15.5px' }}>Menüyü İncele</span>
+                <div className="mt-8 flex flex-col sm:flex-row gap-3">
+                  <Link 
+                    href="/menu" 
+                    className="flex min-h-[50px] w-full sm:w-auto items-center justify-center rounded-full bg-[#3E1F10] px-8 transition-transform hover:scale-[1.02]"
+                  >
+                    <span className="text-white font-bold text-[15px]">Menüyü İncele</span>
                   </Link>
-                  <Link href="/hakkimizda" className="flex min-h-[56px] w-full sm:w-auto items-center justify-center rounded-full border-2 border-[#3D1C08] bg-transparent px-10 transition-all hover:bg-[#F6EDE4]">
-                    <span style={{ color: '#3D1C08', fontWeight: 'bold', fontSize: '15.5px' }}>Hakkımızda</span>
+                  <Link 
+                    href="/hakkimizda" 
+                    className="flex min-h-[50px] w-full sm:w-auto items-center justify-center rounded-full border-2 border-[#3E1F10] bg-transparent px-8 transition-colors hover:bg-[#3E1F10]/5"
+                  >
+                    <span className="text-[#3E1F10] font-bold text-[15px]">Hakkımızda</span>
                   </Link>
                 </div>
 
-                <div className="mt-12 flex flex-col gap-5">
+                <div className="mt-10 flex flex-col gap-4">
                   {trustItems.map((item, index) => (
                     <motion.div
                       initial={{ opacity: 0, x: -10 }}
@@ -211,12 +216,12 @@ export default function Home() {
                       viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: index * 0.1 }}
                       key={item}
-                      className="flex items-start gap-4"
+                      className="flex items-start gap-3"
                     >
-                      <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#3D1C08]/10 text-[#3D1C08]">
+                      <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#3E1F10]/10 text-[#3E1F10]">
                         <Check size={14} strokeWidth={3} />
                       </div>
-                      <p className="text-[16px] font-medium leading-relaxed text-[#3D1C08]">
+                      <p className="text-[15px] font-medium leading-relaxed text-[#3E1F10]">
                         {item}
                       </p>
                     </motion.div>
@@ -224,76 +229,70 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* SAĞ TARAF - Harita Kartı */}
-              <div className="flex flex-col overflow-hidden rounded-[32px] border border-[#EBE1D5] bg-white shadow-sm">
+              {/* SAĞ TARAF: Beton gibi sağlam harita kartı */}
+              <div className="flex flex-col overflow-hidden rounded-[28px] border border-[#EBE1D5] bg-white shadow-md">
                 
-                {/* Kart Başlığı */}
-                <div className="px-6 py-6 sm:px-8 sm:py-8">
-                  <div className="flex items-center gap-4">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#3D1C08]/5 text-[#3D1C08]">
-                      <MapPin size={22} />
+                {/* 1. Kısım: Üst Bilgi */}
+                <div className="p-6 sm:p-8">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#3E1F10]/5 text-[#3E1F10]">
+                      <MapPin size={20} />
                     </div>
                     <div>
-                      <p className="text-[11px] font-extrabold uppercase tracking-[0.25em] text-[#3D1C08]/60">
+                      <p className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-[#3E1F10]/60">
                         Konum
                       </p>
-                      <h3 className="mt-1 font-title text-[1.4rem] font-bold leading-tight text-[#3D1C08] sm:text-[1.6rem]">
+                      <h3 className="mt-0.5 font-title text-[1.3rem] font-bold leading-tight text-[#3E1F10] sm:text-[1.5rem]">
                         Akyazı’da kolay ulaşılabilir konum
                       </h3>
                     </div>
                   </div>
-                </div>
-
-                {/* Harita İframe */}
-                <div className="relative border-y border-[#EBE1D5] bg-[#F6EDE4]">
-                  <iframe
-                    title="Sarılar Unlu Mamüller Konum"
-                    src={siteConfig.googleMapsEmbed}
-                    className="h-[300px] w-full sm:h-[350px] lg:h-[400px]"
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  />
-                  <div className="pointer-events-none absolute inset-0 shadow-[inset_0_0_10px_rgba(0,0,0,0.02)]" />
-                </div>
-
-                {/* RADİKAL ÇÖZÜM 2: Asla Sıkışmayan Adres ve Buton Kutusu */}
-                <div className="bg-[#FCFAF7] p-6 sm:p-8">
-                  <p className="text-[15px] leading-[1.8] text-[#3D1C08]/80 mb-6">
+                  <p className="text-[14px] leading-[1.7] text-[#3E1F10]/75">
                     Merkezi konumumuz sayesinde mağazamıza hızlıca ulaşabilirsiniz. 
                     Harita üzerinden konumu inceleyip doğrudan yol tarifi başlatabilirsiniz.
                   </p>
+                </div>
 
-                  <div className="flex flex-col gap-4 rounded-[20px] bg-white p-5 border border-[#EBE1D5] shadow-sm">
-                    {/* Adres üstte */}
-                    <div className="flex items-center gap-3 border-b border-gray-100 pb-4">
-                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#3D1C08]/5 text-[#3D1C08]">
-                        <MapPin size={16} />
-                      </div>
-                      <p className="text-[14.5px] font-bold text-[#3D1C08] leading-snug">
-                        {siteConfig.address}
-                      </p>
+                {/* 2. Kısım: İframe Harita (Sabit yükseklik, taşma yapmaz) */}
+                <div className="h-[250px] w-full border-y border-[#EBE1D5] bg-gray-50 sm:h-[300px]">
+                  <iframe
+                    title="Sarılar Unlu Mamüller Konum"
+                    src={siteConfig.googleMapsEmbed}
+                    className="h-full w-full border-0"
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
+                </div>
+
+                {/* 3. Kısım: Alt Bilgi ve Buton */}
+                <div className="flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#3E1F10]/5 text-[#3E1F10]">
+                      <MapPin size={14} />
                     </div>
-
-                    {/* Buton altta, %100 genişlik, span ile çivilenmiş beyaz renk */}
-                    <a
-                      href={siteConfig.mapsUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex min-h-[50px] w-full items-center justify-center gap-2 rounded-full bg-[#3D1C08] transition-transform hover:scale-[1.02]"
-                    >
-                      <Navigation size={16} color="#FFFFFF" />
-                      <span style={{ color: '#FFFFFF', fontWeight: 'bold', fontSize: '15px' }}>Yol Tarifi Al</span>
-                    </a>
+                    <p className="text-[14px] font-bold text-[#3E1F10] leading-snug">
+                      {siteConfig.address}
+                    </p>
                   </div>
+
+                  <a
+                    href={siteConfig.mapsUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex min-h-[46px] w-full shrink-0 items-center justify-center gap-2 rounded-full bg-[#3E1F10] px-6 transition-transform hover:scale-[1.02] sm:w-auto"
+                  >
+                    <Navigation size={15} className="text-white" />
+                    <span className="text-white font-bold text-[14px] whitespace-nowrap">Yol Tarifi Al</span>
+                  </a>
                 </div>
 
               </div>
+              
             </div>
           </div>
         </div>
       </motion.section>
 
-      {/* SABİT YÜZEL WHATSAPP BUTONU */}
       <motion.div
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
@@ -301,7 +300,7 @@ export default function Home() {
         className="fixed bottom-6 right-6 z-[90] sm:bottom-8 sm:right-8"
       >
         <div className="group relative flex items-center justify-center">
-          <div className="pointer-events-none absolute right-full mr-4 hidden w-max -translate-x-2 rounded-[14px] bg-white px-5 py-3 text-[14px] font-bold text-[#3D1C08] opacity-0 shadow-[0_10px_24px_rgba(61,28,8,0.12)] transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 sm:block border border-[#EBE1D5]">
+          <div className="pointer-events-none absolute right-full mr-4 hidden w-max -translate-x-2 rounded-[14px] bg-white px-5 py-3 text-[14px] font-bold text-[#3E1F10] opacity-0 shadow-[0_10px_24px_rgba(62,31,16,0.12)] transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 sm:block border border-[#EBE1D5]">
             Size nasıl yardımcı olabiliriz?
             <div className="absolute right-[-6px] top-1/2 h-3 w-3 -translate-y-1/2 rotate-45 border-r border-t border-[#EBE1D5] bg-white" />
           </div>
