@@ -1,0 +1,179 @@
+.iletisim-wrapper {
+  padding-top: 140px;
+  background: #fcfaf7;
+  min-height: 100vh;
+}
+
+/* CONTAINER */
+.iletisim-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+}
+
+/* LEFT */
+.iletisim-left h1 {
+  font-size: 58px;
+  line-height: 1.05;
+  letter-spacing: -1px;
+}
+
+.iletisim-left p {
+  margin-top: 24px;
+  color: #6b4b35;
+  font-size: 18px;
+}
+
+/* INFO */
+.iletisim-info {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.iletisim-info > div {
+  display: flex;
+  gap: 15px;
+}
+
+.iletisim-info svg {
+  color: #a15c2f;
+}
+
+.iletisim-info span {
+  font-size: 12px;
+  color: #c27e48;
+}
+
+.iletisim-info p {
+  font-size: 15px;
+}
+
+/* RIGHT GRID */
+.iletisim-right {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* CARD */
+.iletisim-card {
+  position: relative;
+  display: block;
+  background: white;
+  padding: 32px;
+  border-radius: 28px;
+  transition: all 0.4s ease;
+  border: 1px solid #eee;
+  overflow: hidden;
+}
+
+/* shine efekti */
+.iletisim-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.4),
+    transparent
+  );
+  opacity: 0;
+  transition: 0.6s;
+}
+
+.iletisim-card:hover::before {
+  opacity: 1;
+  transform: translateX(100%);
+}
+
+/* hover */
+.iletisim-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+}
+
+/* icon animasyon */
+.card-top svg:first-child {
+  transition: 0.4s;
+}
+
+.iletisim-card:hover .card-top svg:first-child {
+  transform: scale(1.2) rotate(-8deg);
+}
+
+/* arrow */
+.card-top svg:last-child {
+  opacity: 0.4;
+  transition: 0.4s;
+}
+
+.iletisim-card:hover .card-top svg:last-child {
+  opacity: 1;
+  transform: rotate(45deg);
+}
+
+/* RENKLER */
+
+/* PHONE */
+.iletisim-card.phone {
+  border-top: 3px solid #ff8c42;
+}
+.iletisim-card.phone:hover {
+  box-shadow: 0 20px 50px rgba(255,140,66,0.3);
+}
+
+/* WHATSAPP */
+.iletisim-card.whatsapp {
+  border-top: 3px solid #25D366;
+}
+.iletisim-card.whatsapp:hover {
+  box-shadow: 0 20px 50px rgba(37,211,102,0.35);
+}
+
+/* INSTAGRAM */
+.iletisim-card.instagram {
+  border-top: 3px solid #E1306C;
+}
+.iletisim-card.instagram:hover {
+  box-shadow: 0 20px 60px rgba(225,48,108,0.35);
+}
+
+/* MAP */
+.iletisim-card.map {
+  border-top: 3px solid #4285F4;
+}
+.iletisim-card.map:hover {
+  box-shadow: 0 20px 50px rgba(66,133,244,0.3);
+}
+
+/* TEXT */
+.iletisim-card h3 {
+  font-size: 22px;
+  margin-top: 10px;
+}
+
+.iletisim-card p {
+  margin-top: 6px;
+  color: #666;
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .iletisim-container {
+    grid-template-columns: 1fr;
+  }
+
+  .iletisim-right {
+    grid-template-columns: 1fr;
+  }
+
+  .iletisim-left h1 {
+    font-size: 38px;
+  }
+}

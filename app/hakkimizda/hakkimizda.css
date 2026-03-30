@@ -1,0 +1,144 @@
+.hak-wrapper {
+  padding-top: 120px;
+  background: #fcfaf7;
+}
+
+/* HERO */
+.hak-hero {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 20px 120px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* LEFT */
+.hak-title {
+  font-size: 64px;
+  line-height: 1.1;
+}
+
+.hak-text {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #666;
+}
+
+.hak-buttons {
+  margin-top: 30px;
+  display: flex;
+  gap: 12px;
+}
+
+/* RIGHT IMAGE FIX */
+.hak-right {
+  width: 100%;
+}
+
+.hak-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 480px; /* 🔥 KRİTİK */
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+.hak-image {
+  object-fit: cover;
+}
+
+/* STORY */
+.hak-story {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 120px 20px;
+  text-align: center;
+}
+
+.hak-story-title {
+  font-size: 48px;
+  margin-bottom: 40px;
+}
+
+.hak-story-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  color: #666;
+}
+
+/* STATS */
+.hak-stats {
+  margin-top: 80px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.hak-stats div span {
+  font-size: 12px;
+  color: #c27e48;
+}
+
+.hak-stats div strong {
+  display: block;
+  font-size: 42px;
+  margin-top: 10px;
+}
+
+/* WHY */
+.hak-why {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 120px 20px;
+}
+
+.hak-why-title {
+  text-align: center;
+  font-size: 48px;
+  margin-bottom: 80px;
+}
+
+.hak-why-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+
+.hak-card {
+  text-align: left;
+}
+
+.hak-icon {
+  width: 45px;
+  height: 45px;
+  background: #f3e3d3;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .hak-hero {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .hak-image-wrapper {
+    height: 320px;
+  }
+
+  .hak-why-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hak-stats {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
