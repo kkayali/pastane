@@ -36,50 +36,50 @@ export default function Hero() {
   }, [active]);
 
   return (
-    <section className="hero-section page-hero overflow-hidden">
+    <section className="hero-section page-hero overflow-hidden pt-[calc(108px+env(safe-area-inset-top))] pb-10 sm:pt-[140px] sm:pb-14 lg:pt-12 lg:pb-0">
       <div className="hero-blob hero-blob-1" />
       <div className="hero-blob hero-blob-2" />
 
       <div className="container-custom">
         <div className="grid items-center gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:gap-14">
           <div className="relative z-[1]">
-            <div className="eyebrow">
-              Günlük üretim • Butik sunum • Özel gün siparişleri
+            <div className="inline-flex max-w-full rounded-full border border-[var(--line)] bg-white/70 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--primary)] shadow-sm backdrop-blur-md sm:text-[12px]">
+              <span className="block leading-relaxed sm:whitespace-nowrap">
+                Günlük üretim • Butik sunum • Özel gün siparişleri
+              </span>
             </div>
 
-            <p className="mt-7 font-script text-[1.75rem] leading-none text-[var(--primary)] sm:text-[2.15rem]">
+            <p className="mt-6 font-script text-[1.6rem] leading-none text-[var(--primary)] sm:mt-7 sm:text-[2.15rem]">
               Sevgiyle hazırlanır
             </p>
 
-            {/* BAŞLIK DÜZELTİLDİ: Kelimeler mantıklı bölündü ve max-w kısıtlaması kaldırıldı */}
-            <h1 className="mt-4 font-title text-[3.15rem] leading-[1.05] tracking-[-0.04em] text-[var(--primary-dark)] sm:text-[4.2rem] lg:text-[5rem]">
+            <h1 className="mt-3 font-title text-[2.95rem] leading-[1.02] tracking-[-0.045em] text-[var(--primary-dark)] sm:mt-4 sm:text-[4.2rem] lg:text-[5rem]">
               Her gün taze hazırlanan
               <br />
               lezzetler
             </h1>
 
-            <p className="mt-6 max-w-[34rem] text-[0.98rem] leading-8 text-[var(--text-soft)] sm:text-[1rem]">
+            <p className="mt-5 max-w-[34rem] text-[1rem] leading-8 text-[var(--text-soft)] sm:mt-6 sm:text-[1rem]">
               Pastadan sütlü tatlılara, fırın ürünlerinden özel gün
               siparişlerine kadar uzanan seçili lezzetlerimizle Akyazı’da sıcak,
               zarif ve güven veren bir deneyim sunuyoruz.
             </p>
 
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
-              <Link href="/menu" className="btn-primary">
+            <div className="mt-7 flex flex-col gap-4 sm:mt-8 sm:flex-row sm:items-center">
+              <Link href="/menu" className="btn-primary w-full justify-center sm:w-auto">
                 Menüyü İncele
                 <ArrowRight size={16} />
               </Link>
 
-              {/* BUTON KONTRASTI DÜZELTİLDİ: Görünürlüğü artırıldı */}
               <Link
                 href="/iletisim"
-                className="inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full border border-[var(--primary)]/40 bg-white/90 px-8 text-[0.96rem] font-bold text-[var(--primary-dark)] shadow-md backdrop-blur-md transition-all hover:-translate-y-0.5 hover:bg-white hover:shadow-lg"
+                className="inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full border border-[var(--primary)]/40 bg-white/90 px-8 text-[0.96rem] font-bold text-[var(--primary-dark)] shadow-md backdrop-blur-md transition-all hover:-translate-y-0.5 hover:bg-white hover:shadow-lg sm:w-auto"
               >
                 Sipariş ve İletişim
               </Link>
             </div>
 
-            <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3 text-[13.5px] font-bold text-[var(--primary-dark)]/80 sm:text-[14px]">
+            <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 text-[13.5px] font-bold text-[var(--primary-dark)]/80 sm:mt-9 sm:gap-x-6 sm:text-[14px]">
               {heroFacts.map((item, index) => (
                 <div key={item} className="flex items-center gap-3">
                   <span>{item}</span>
@@ -91,14 +91,14 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="relative z-[1]">
-            <div className="relative rounded-[36px] border border-[var(--line)] bg-[rgba(255,250,244,0.82)] p-3 shadow-[var(--shadow-medium)] sm:p-4">
-              <div className="absolute left-5 top-5 z-10 rounded-full bg-[rgba(255,250,244,0.88)] px-4 py-2 text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--primary-dark)] shadow-[0_8px_20px_rgba(84,45,20,0.06)] backdrop-blur-md sm:text-[11px]">
+          <div className="relative z-[1] mt-2 sm:mt-4 lg:mt-0">
+            <div className="relative rounded-[28px] border border-[var(--line)] bg-[rgba(255,250,244,0.82)] p-3 shadow-[var(--shadow-medium)] sm:rounded-[36px] sm:p-4">
+              <div className="absolute left-4 top-4 z-10 rounded-full bg-[rgba(255,250,244,0.88)] px-3 py-2 text-[9px] font-bold uppercase tracking-[0.16em] text-[var(--primary-dark)] shadow-[0_8px_20px_rgba(84,45,20,0.06)] backdrop-blur-md sm:left-5 sm:top-5 sm:px-4 sm:text-[11px]">
                 Özel sunumlar • Taze üretim
               </div>
 
-              <div className="relative overflow-hidden rounded-[30px] bg-[#f8eee2]">
-                <div className="relative h-[360px] sm:h-[480px] lg:h-[620px]">
+              <div className="relative overflow-hidden rounded-[24px] bg-[#f8eee2] sm:rounded-[30px]">
+                <div className="relative h-[320px] sm:h-[480px] lg:h-[620px]">
                   {slides.map((src, i) => (
                     <div
                       key={`${src}-${i}`}
@@ -137,9 +137,8 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* SLIDER NOKTALARI: margin-top artırıldı (mt-8) */}
             {slides.length > 1 && (
-              <div className="mt-8 flex items-center justify-center gap-3">
+              <div className="mt-6 flex items-center justify-center gap-3 sm:mt-8">
                 {slides.slice(0, Math.min(slides.length, 6)).map((_, i) => (
                   <button
                     key={i}

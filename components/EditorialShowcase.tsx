@@ -18,7 +18,7 @@ const items = [
   {
     image: "/images/menu/dugun-nisan/dugun-nisan.jpeg",
     eyebrow: "Butik cizgi • Ozel gunler",
-    title: "Sik sunumlarin\nen ozel dokunusu",
+    title: "Guzel sunumlarin\nen ozel dokunusu",
     text: "Dugun, nisan ve kutlamalara zarif gorunum katan ozenli hazirlik anlayisi.",
   },
 ];

@@ -153,145 +153,133 @@ export default function Home() {
 
       <EditorialShowcase />
 
-      {/* KESİN ÇÖZÜM BÖLÜMÜ */}
-      <motion.section 
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="section-sm pt-16 pb-24 sm:pt-24 sm:pb-32"
-      >
-        <div className="container-custom">
-          
-          {/* Ana Kapsayıcı */}
-          <div className="relative rounded-[40px] bg-[#FCFAF7] p-6 sm:p-10 lg:p-14 xl:p-16 shadow-sm border border-[#EBE1D5]">
-            
-            {/* Dekoratif arka plan ışıkları */}
-            <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[40px]">
-               <div className="absolute -left-20 top-0 h-96 w-96 rounded-full bg-[#3E1F10] blur-[140px] opacity-[0.03]" />
-               <div className="absolute -right-20 bottom-0 h-96 w-96 rounded-full bg-[#3E1F10] blur-[140px] opacity-[0.03]" />
-            </div>
+     <motion.section 
+  initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, amount: 0.2 }}
+  transition={{ duration: 0.8, ease: "easeOut" }}
+  className="section-sm pt-16 pb-24 sm:pt-24 sm:pb-32"
+>
+  <div className="container-custom">
+    <div className="relative">
+      <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+        
+        {/* SOL TARAF */}
+        <div className="flex flex-col">
+          <div className="mb-4">
+            <ScriptText className="text-[2rem] text-[#3E1F10]/80 sm:text-[2.4rem]">
+              Bize Ulaşın
+            </ScriptText>
+          </div>
 
-            {/* İki sütunlu basit grid. Asla taşmaz. */}
-            <div className="relative z-10 grid gap-10 lg:grid-cols-2 lg:gap-14 items-center">
-              
-              {/* SOL TARAF: Yazılar */}
-              <div className="flex flex-col">
-                <div className="mb-4">
-                  <ScriptText className="text-[2rem] text-[#3E1F10]/80 sm:text-[2.4rem]">
-                    Bize Ulaşın
-                  </ScriptText>
+          <h2 className="font-title text-[2.2rem] leading-[1.15] tracking-tight text-[#3E1F10] sm:text-[2.6rem] lg:text-[2.8rem]">
+            Akyazı’da günlük üretim, şık sunum, gerçek lezzet
+          </h2>
+
+          <p className="mt-5 max-w-[620px] text-[15px] leading-[1.8] text-[#3E1F10]/80 sm:text-[16px]">
+            1970’den bu yana üretim kültürünü sürdüren Sarılar Unlu
+            Mamüller; pasta, tatlı ve fırın ürünlerinde günlük tazelik,
+            özenli hazırlık ve zarif sunum anlayışını bir araya getirir.
+          </p>
+
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Link 
+              href="/menu" 
+              className="flex min-h-[50px] w-full items-center justify-center rounded-full bg-[#3E1F10] px-8 transition-transform hover:scale-[1.02] sm:w-auto"
+            >
+              <span className="text-[15px] font-bold text-white">Menüyü İncele</span>
+            </Link>
+
+            <Link 
+              href="/hakkimizda" 
+              className="flex min-h-[50px] w-full items-center justify-center rounded-full border-2 border-[#3E1F10] bg-transparent px-8 transition-colors hover:bg-[#3E1F10]/5 sm:w-auto"
+            >
+              <span className="text-[15px] font-bold text-[#3E1F10]">Hakkımızda</span>
+            </Link>
+          </div>
+
+          <div className="mt-10 flex flex-col gap-4">
+            {trustItems.map((item, index) => (
+              <motion.div
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                key={item}
+                className="flex items-start gap-3"
+              >
+                <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#3E1F10]/10 text-[#3E1F10]">
+                  <Check size={14} strokeWidth={3} />
                 </div>
-
-                <h2 className="font-title text-[2.2rem] leading-[1.15] tracking-tight text-[#3E1F10] sm:text-[2.6rem] lg:text-[2.8rem]">
-                  Akyazı’da günlük üretim, şık sunum, gerçek lezzet
-                </h2>
-
-                <p className="mt-5 text-[15px] leading-[1.8] text-[#3E1F10]/80 sm:text-[16px]">
-                  1970’den bu yana üretim kültürünü sürdüren Sarılar Unlu
-                  Mamüller; pasta, tatlı ve fırın ürünlerinde günlük tazelik,
-                  özenli hazırlık ve zarif sunum anlayışını bir araya getirir.
+                <p className="text-[15px] font-medium leading-relaxed text-[#3E1F10]">
+                  {item}
                 </p>
-
-                <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                  <Link 
-                    href="/menu" 
-                    className="flex min-h-[50px] w-full sm:w-auto items-center justify-center rounded-full bg-[#3E1F10] px-8 transition-transform hover:scale-[1.02]"
-                  >
-                    <span className="text-white font-bold text-[15px]">Menüyü İncele</span>
-                  </Link>
-                  <Link 
-                    href="/hakkimizda" 
-                    className="flex min-h-[50px] w-full sm:w-auto items-center justify-center rounded-full border-2 border-[#3E1F10] bg-transparent px-8 transition-colors hover:bg-[#3E1F10]/5"
-                  >
-                    <span className="text-[#3E1F10] font-bold text-[15px]">Hakkımızda</span>
-                  </Link>
-                </div>
-
-                <div className="mt-10 flex flex-col gap-4">
-                  {trustItems.map((item, index) => (
-                    <motion.div
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      key={item}
-                      className="flex items-start gap-3"
-                    >
-                      <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#3E1F10]/10 text-[#3E1F10]">
-                        <Check size={14} strokeWidth={3} />
-                      </div>
-                      <p className="text-[15px] font-medium leading-relaxed text-[#3E1F10]">
-                        {item}
-                      </p>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-
-              {/* SAĞ TARAF: Beton gibi sağlam harita kartı */}
-              <div className="flex flex-col overflow-hidden rounded-[28px] border border-[#EBE1D5] bg-white shadow-md">
-                
-                {/* 1. Kısım: Üst Bilgi */}
-                <div className="p-6 sm:p-8">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#3E1F10]/5 text-[#3E1F10]">
-                      <MapPin size={20} />
-                    </div>
-                    <div>
-                      <p className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-[#3E1F10]/60">
-                        Konum
-                      </p>
-                      <h3 className="mt-0.5 font-title text-[1.3rem] font-bold leading-tight text-[#3E1F10] sm:text-[1.5rem]">
-                        Akyazı’da kolay ulaşılabilir konum
-                      </h3>
-                    </div>
-                  </div>
-                  <p className="text-[14px] leading-[1.7] text-[#3E1F10]/75">
-                    Merkezi konumumuz sayesinde mağazamıza hızlıca ulaşabilirsiniz. 
-                    Harita üzerinden konumu inceleyip doğrudan yol tarifi başlatabilirsiniz.
-                  </p>
-                </div>
-
-                {/* 2. Kısım: İframe Harita (Sabit yükseklik, taşma yapmaz) */}
-                <div className="h-[250px] w-full border-y border-[#EBE1D5] bg-gray-50 sm:h-[300px]">
-                  <iframe
-                    title="Sarılar Unlu Mamüller Konum"
-                    src={siteConfig.googleMapsEmbed}
-                    className="h-full w-full border-0"
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  />
-                </div>
-
-                {/* 3. Kısım: Alt Bilgi ve Buton */}
-                <div className="flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#3E1F10]/5 text-[#3E1F10]">
-                      <MapPin size={14} />
-                    </div>
-                    <p className="text-[14px] font-bold text-[#3E1F10] leading-snug">
-                      {siteConfig.address}
-                    </p>
-                  </div>
-
-                  <a
-                    href={siteConfig.mapsUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex min-h-[46px] w-full shrink-0 items-center justify-center gap-2 rounded-full bg-[#3E1F10] px-6 transition-transform hover:scale-[1.02] sm:w-auto"
-                  >
-                    <Navigation size={15} className="text-white" />
-                    <span className="text-white font-bold text-[14px] whitespace-nowrap">Yol Tarifi Al</span>
-                  </a>
-                </div>
-
-              </div>
-              
-            </div>
+              </motion.div>
+            ))}
           </div>
         </div>
-      </motion.section>
+
+        {/* SAĞ TARAF */}
+        <div className="flex flex-col overflow-hidden rounded-[28px] border border-[#EBE1D5] bg-white shadow-md">
+          <div className="p-6 sm:p-8">
+            <div className="mb-3 flex items-center gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#3E1F10]/5 text-[#3E1F10]">
+                <MapPin size={20} />
+              </div>
+              <div>
+                <p className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-[#3E1F10]/60">
+                  Konum
+                </p>
+                <h3 className="mt-0.5 font-title text-[1.3rem] font-bold leading-tight text-[#3E1F10] sm:text-[1.5rem]">
+                  Akyazı’da kolay ulaşılabilir konum
+                </h3>
+              </div>
+            </div>
+
+            <p className="text-[14px] leading-[1.7] text-[#3E1F10]/75">
+              Merkezi konumumuz sayesinde mağazamıza hızlıca ulaşabilirsiniz.
+              Harita üzerinden konumu inceleyip doğrudan yol tarifi başlatabilirsiniz.
+            </p>
+          </div>
+
+          <div className="h-[250px] w-full border-y border-[#EBE1D5] bg-gray-50 sm:h-[300px]">
+            <iframe
+              title="Sarılar Unlu Mamüller Konum"
+              src={siteConfig.googleMapsEmbed}
+              className="h-full w-full border-0"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+
+          <div className="flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+            <div className="flex items-center gap-3">
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#3E1F10]/5 text-[#3E1F10]">
+                <MapPin size={14} />
+              </div>
+              <p className="text-[14px] font-bold leading-snug text-[#3E1F10]">
+                {siteConfig.address}
+              </p>
+            </div>
+
+            <a
+              href={siteConfig.mapsUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="flex min-h-[46px] w-full shrink-0 items-center justify-center gap-2 rounded-full bg-[#3E1F10] px-6 transition-transform hover:scale-[1.02] sm:w-auto"
+            >
+              <Navigation size={15} className="text-white" />
+              <span className="whitespace-nowrap text-[14px] font-bold text-white">
+                Yol Tarifi Al
+              </span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</motion.section>
 
       <motion.div
         initial={{ scale: 0, opacity: 0 }}
