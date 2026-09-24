@@ -2,167 +2,237 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
-import { ArrowRight } from "lucide-react";
-import { homeImages } from "@/data/menu";
+import { useEffect, useRef, useState } from "react";
+import {
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  Clock3,
+  MapPin,
+  MessageCircle,
+  Wheat,
+} from "lucide-react";
+import { whatsappLink } from "@/data/site";
+import "./Hero.css";
 
 const slides = [
-  homeImages.hero,
-  ...homeImages.showcase,
-  ...homeImages.gallery,
-].filter(Boolean);
+  {
+    src: "/images/home/hero.jpeg",
+    label: "Sarılar'dan lezzetler",
+    alt: "Sarılar pasta ve tatlı sunumu",
+  },
+  {
+    src: "/images/menu/pastalar/meyvelipasta1.jpeg",
+    label: "Günlük pastalar",
+    alt: "Sarılar meyveli günlük pasta",
+  },
+  {
+    src: "/images/menu/dugun-nisan/dugun-nisan.jpeg",
+    label: "Özel gün pastaları",
+    alt: "Sarılar düğün ve nişan pastası",
+  },
+  {
+    src: "/images/menu/sutlu-tatlilar/magnolya1.jpeg",
+    label: "Sütlü tatlılar",
+    alt: "Sarılar magnolia tatlısı",
+  },
+] as const;
 
-const heroFacts = [
-  "1970’den beri üretim",
-  "Günlük taze hazırlık",
-  "Özel gün siparişleri",
-];
+const orderHref = whatsappLink("Merhaba, sipariş vermek istiyorum.");
 
 export default function Hero() {
   const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
+  const [announcement, setAnnouncement] = useState("");
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
 
   useEffect(() => {
-    if (slides.length <= 1) return;
-    const timer = setInterval(() => {
-      setActive((prev) => (prev + 1) % slides.length);
-    }, 4200);
+    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReducedMotion(query.matches);
 
-    return () => clearInterval(timer);
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
   }, []);
 
-  const accentImage = useMemo(() => {
-    if (slides.length < 2) return slides[0];
-    return slides[(active + 1) % slides.length];
-  }, [active]);
+  useEffect(() => {
+    if (paused || reducedMotion) return;
+
+    const timer = window.setInterval(() => {
+      if (!document.hidden) {
+        setActive((current) => (current + 1) % slides.length);
+      }
+    }, 5500);
+
+    return () => window.clearInterval(timer);
+  }, [active, paused, reducedMotion]);
+
+  const selectSlide = (index: number) => {
+    setActive(index);
+    setAnnouncement(`${slides[index].label}, ${index + 1} / ${slides.length}`);
+  };
+
+  const step = (direction: number) => {
+    selectSlide((active + direction + slides.length) % slides.length);
+  };
+
+  const finishSwipe = (x: number, y: number) => {
+    const start = touchStart.current;
+    touchStart.current = null;
+    if (!start) return;
+
+    const dx = x - start.x;
+    const dy = y - start.y;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.3) {
+      step(dx < 0 ? 1 : -1);
+    }
+  };
 
   return (
-    <section className="hero-section page-hero overflow-hidden">
-      <div className="hero-blob hero-blob-1" />
-      <div className="hero-blob hero-blob-2" />
-
-      <div className="container-custom">
-        <div className="grid items-center gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:gap-14">
-          
-          {/* MOBİLDE ÖNCE GÖRSEL */}
-          <div className="order-1 relative z-[1] lg:order-2">
-            <div className="relative rounded-[26px] border border-[var(--line)] bg-[rgba(255,250,244,0.82)] p-2.5 shadow-[var(--shadow-medium)] sm:rounded-[32px] sm:p-4">
-              <div className="absolute left-3 top-3 z-10 rounded-full bg-[rgba(255,250,244,0.9)] px-3 py-1.5 text-[8.5px] font-bold uppercase tracking-[0.16em] text-[var(--primary-dark)] shadow-[0_8px_20px_rgba(84,45,20,0.06)] backdrop-blur-md sm:left-5 sm:top-5 sm:px-4 sm:py-2 sm:text-[11px]">
-                Özel sunumlar • Taze üretim
-              </div>
-
-              <div className="relative overflow-hidden rounded-[22px] bg-[#f8eee2] sm:rounded-[28px]">
-                <div className="relative h-[300px] sm:h-[440px] lg:h-[620px]">
-                  {slides.map((src, i) => (
-                    <div
-                      key={`${src}-${i}`}
-                      className={`absolute inset-0 transition-opacity duration-700 ${
-                        i === active ? "opacity-100" : "opacity-0"
-                      }`}
-                    >
-                      <Image
-                        src={src}
-                        alt={`Sarılar Unlu Mamüller görseli ${i + 1}`}
-                        fill
-                        priority={i === 0}
-                        className="object-cover"
-                      />
-                    </div>
-                  ))}
-                </div>
-
-                {accentImage && (
-                  <button
-                    type="button"
-                    onClick={() => setActive((active + 1) % slides.length)}
-                    className="absolute bottom-4 right-4 hidden w-[150px] overflow-hidden rounded-[24px] border border-white/60 bg-[rgba(255,250,244,0.78)] p-2 shadow-[0_16px_36px_rgba(84,45,20,0.1)] backdrop-blur-md transition duration-300 hover:-translate-y-1 lg:block"
-                    aria-label="Sonraki görsel"
-                  >
-                    <div className="relative h-[140px] overflow-hidden rounded-[18px]">
-                      <Image
-                        src={accentImage}
-                        alt="Öne çıkan diğer ürün"
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                  </button>
-                )}
-              </div>
-            </div>
-
-            {slides.length > 1 && (
-              <div className="mt-5 flex items-center justify-center gap-2.5 sm:mt-7 sm:gap-3">
-                {slides.slice(0, Math.min(slides.length, 6)).map((_, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    aria-label={`Slider ${i + 1}`}
-                    onClick={() => setActive(i)}
-                    className={`rounded-full transition-all ${
-                      i === active
-                        ? "h-2.5 w-8 bg-[var(--primary)]"
-                        : "h-2.5 w-2.5 bg-[var(--primary)]/20"
-                    }`}
-                  />
-                ))}
-              </div>
-            )}
+    <>
+      <section className="sarilar-hero">
+        <div className="container sarilar-hero__grid">
+          <div className="sarilar-hero__intro">
+            <p className="sarilar-hero__eyebrow">Akyazı · 1970&apos;ten beri</p>
+            <h1 className="sarilar-hero__title">
+              Güzel günlerin <em>lezzet durağı.</em>
+            </h1>
           </div>
 
-          {/* MOBİLDE SONRA YAZI */}
-          <div className="order-2 relative z-[1] lg:order-1">
-            <div className="inline-flex max-w-full rounded-full border border-[var(--line)] bg-white/75 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--primary)] shadow-sm backdrop-blur-md sm:px-4 sm:text-[12px]">
-              <span className="block leading-relaxed">
-                Günlük üretim • Butik sunum • Özel gün siparişleri
-              </span>
-            </div>
-
-            <p className="mt-5 font-script text-[1.45rem] leading-none text-[var(--primary)] sm:mt-7 sm:text-[2.15rem]">
-              Sevgiyle hazırlanır
-            </p>
-
-            <h1 className="mt-3 font-title text-[2.75rem] leading-[1.02] tracking-[-0.045em] text-[var(--primary-dark)] sm:mt-4 sm:text-[4.1rem] lg:text-[5rem]">
-              Her gün taze hazırlanan
-              <br />
-              lezzetler
-            </h1>
-
-            <p className="mt-5 max-w-[34rem] text-[0.98rem] leading-8 text-[var(--text-soft)] sm:mt-6 sm:text-[1rem]">
-              Pastadan sütlü tatlılara, fırın ürünlerinden özel gün
-              siparişlerine kadar uzanan seçili lezzetlerimizle Akyazı’da sıcak,
-              zarif ve güven veren bir deneyim sunuyoruz.
-            </p>
-
-            <div className="mt-7 flex flex-col gap-3.5 sm:mt-8 sm:flex-row sm:items-center sm:gap-4">
-              <Link
-                href="/menu"
-                className="btn-primary w-full justify-center sm:w-auto"
-              >
-                Menüyü İncele
-                <ArrowRight size={16} />
-              </Link>
-
-              <Link
-                href="/iletisim"
-                className="inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full border border-[var(--primary)]/30 bg-white/92 px-8 text-[0.96rem] font-bold text-[var(--primary-dark)] shadow-md backdrop-blur-md transition-all hover:-translate-y-0.5 hover:bg-white hover:shadow-lg sm:w-auto"
-              >
-                Sipariş ve İletişim
-              </Link>
-            </div>
-
-            <div className="mt-7 flex flex-wrap items-center gap-x-4 gap-y-3 text-[13px] font-bold text-[var(--primary-dark)]/80 sm:mt-9 sm:gap-x-6 sm:text-[14px]">
-              {heroFacts.map((item, index) => (
-                <div key={item} className="flex items-center gap-3">
-                  <span>{item}</span>
-                  {index !== heroFacts.length - 1 && (
-                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--primary)]/40" />
-                  )}
+          <div
+            className="sarilar-hero__showcase"
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+            onFocusCapture={() => setPaused(true)}
+            onBlurCapture={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget)) setPaused(false);
+            }}
+          >
+            <div
+              id="sarilar-hero-media"
+              className="sarilar-hero__media"
+              role="region"
+              aria-roledescription="görsel akışı"
+              aria-label="Sarılar ürün fotoğrafları"
+              onTouchStart={(event) => {
+                const touch = event.changedTouches[0];
+                touchStart.current = { x: touch.clientX, y: touch.clientY };
+              }}
+              onTouchEnd={(event) => {
+                const touch = event.changedTouches[0];
+                finishSwipe(touch.clientX, touch.clientY);
+              }}
+              onTouchCancel={() => { touchStart.current = null; }}
+            >
+              {slides.map((slide, index) => (
+                <div
+                  key={slide.src}
+                  className="sarilar-hero__slide"
+                  data-active={index === active}
+                  aria-hidden={index !== active}
+                >
+                  <Image
+                    src={slide.src}
+                    alt={index === active ? slide.alt : ""}
+                    fill
+                    priority={index === 0}
+                    sizes="(max-width: 540px) calc(100vw - 28px), (max-width: 900px) calc(100vw - 32px), (max-width: 1200px) 48vw, 590px"
+                  />
                 </div>
               ))}
+
+              <div className="sarilar-hero__photo-caption">
+                <span className="sarilar-hero__photo-count" aria-hidden="true">
+                  {String(active + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}
+                </span>
+                <p>{slides[active].label}</p>
+              </div>
+
+              <div className="sarilar-hero__arrows" role="group" aria-label="Fotoğraf kontrolü">
+                <button
+                  type="button"
+                  onClick={() => step(-1)}
+                  aria-label="Önceki görsel"
+                  aria-controls="sarilar-hero-media"
+                >
+                  <ChevronLeft size={20} aria-hidden="true" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => step(1)}
+                  aria-label="Sonraki görsel"
+                  aria-controls="sarilar-hero-media"
+                >
+                  <ChevronRight size={20} aria-hidden="true" />
+                </button>
+              </div>
             </div>
+
+            <div className="sarilar-hero__thumb-bar">
+              <span className="sarilar-hero__thumb-heading">Fotoğrafları keşfet</span>
+              <div className="sarilar-hero__thumbs" role="group" aria-label="Fotoğraf seç">
+                {slides.map((slide, index) => (
+                  <button
+                    type="button"
+                    key={slide.src}
+                    className="sarilar-hero__thumb"
+                    data-active={index === active}
+                    onClick={() => selectSlide(index)}
+                    aria-label={`${slide.label} görselini göster`}
+                    aria-pressed={index === active}
+                    aria-controls="sarilar-hero-media"
+                  >
+                    <Image src={slide.src} alt="" fill sizes="72px" />
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <span className="sarilar-hero__screen-reader" role="status">
+              {announcement}
+            </span>
+          </div>
+
+          <div className="sarilar-hero__details">
+            <p className="sarilar-hero__lead">
+              Günlük pastalar, tatlılar, fırın ürünleri ve özel günler için hazırlanan
+              lezzetleri keşfedin. Sipariş ve güncel ürün bilgisi için bize doğrudan ulaşın.
+            </p>
+
+            <div className="sarilar-hero__actions">
+              <Link className="sarilar-hero__menu-link" href="/menu">
+                Menüyü keşfet <ArrowRight size={18} strokeWidth={1.8} aria-hidden="true" />
+              </Link>
+              <a className="sarilar-hero__order-link" href={orderHref} target="_blank" rel="noopener noreferrer">
+                <MessageCircle size={18} strokeWidth={1.8} aria-hidden="true" />
+                WhatsApp&apos;tan yaz
+              </a>
+            </div>
+
+            <p className="sarilar-hero__note">
+              Akyazı&apos;daki mağazamızdan sipariş ve teslimat bilgisi alabilirsiniz.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div className="sarilar-hero__trust">
+        <div className="container sarilar-hero__trust-inner">
+          <div className="sarilar-hero__trust-item">
+            <Clock3 size={22} strokeWidth={1.5} aria-hidden="true" />
+            <span>1970&apos;ten beri <strong>Akyazı&apos;da</strong></span>
+          </div>
+          <div className="sarilar-hero__trust-item">
+            <Wheat size={22} strokeWidth={1.5} aria-hidden="true" />
+            <span>Günlük üretim <strong>kendi imalatımız</strong></span>
+          </div>
+          <div className="sarilar-hero__trust-item">
+            <MapPin size={22} strokeWidth={1.5} aria-hidden="true" />
+            <span>Mağazada <strong>doğrudan iletişim</strong></span>
           </div>
         </div>
       </div>
-    </section>
+    </>
   );
 }

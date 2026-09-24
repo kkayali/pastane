@@ -1,0 +1,78 @@
+/* Menü: kategori kartlarını karşılayan sakin, editoryal giriş. */
+.menu-page { background: var(--bg); }
+.menu-page__intro {
+  padding-block: clamp(62px, 6.5vw, 105px);
+  background: #f6f0e7;
+}
+.menu-page__intro-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(230px, .46fr);
+  align-items: end;
+  gap: clamp(25px, 6vw, 95px);
+}
+.menu-page__intro-copy { min-width: 0; }
+.menu-page__intro .page-title {
+  max-width: 16ch;
+  margin-top: 18px;
+  font-size: clamp(48px, 5.2vw, 76px);
+}
+.menu-page__intro .lead { max-width: 53ch; }
+.menu-page__explore {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  min-height: 45px;
+  margin-top: 26px;
+  border-bottom: 1px solid #9b6a38;
+  color: #704820;
+  font-size: 13px;
+  font-weight: 750;
+  transition: gap .2s ease, color .2s ease;
+}
+.menu-page__explore:hover { gap: 16px; color: #2b1d14; }
+.menu-page__figures {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(15px, 2vw, 26px);
+  padding-bottom: 11px;
+}
+.menu-page__figures > div { min-width: 0; padding-top: 18px; border-top: 1px solid #c3ab8f; }
+.menu-page__figures strong {
+  display: block;
+  font: 400 clamp(45px, 5vw, 73px)/1 var(--serif);
+  letter-spacing: -.065em;
+  color: #90633e;
+}
+.menu-page__figures span {
+  display: block;
+  margin-top: 6px;
+  color: #695a4c;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+.menu-page__collection-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: clamp(25px, 3vw, 40px);
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+.menu-page__collection-head p { color: var(--muted); font-size: 13px; }
+.menu-page__grid { align-items: stretch; }
+
+@media (max-width: 760px) {
+  .menu-page__intro-inner { grid-template-columns: minmax(0, 1fr); gap: 35px; }
+  .menu-page__figures { max-width: 400px; width: 100%; }
+  .menu-page__intro .page-title { font-size: clamp(45px, 7vw, 62px); }
+  .menu-page__collection-head { align-items: flex-start; flex-direction: column; gap: 7px; }
+}
+@media (max-width: 540px) {
+  .menu-page__intro { padding-block: 50px 55px; }
+  .menu-page__intro .page-title { font-size: clamp(41px, 10.5vw, 54px); }
+  .menu-page__figures { gap: 20px; }
+  .menu-page__figures strong { font-size: 49px; }
+}

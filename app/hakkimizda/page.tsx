@@ -1,134 +1,125 @@
-"use client";
-
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight, Clock3, MapPin, MessageCircle, Wheat } from "lucide-react";
+import SectionTitle from "@/components/SectionTitle";
+import { siteConfig, whatsappLink } from "@/data/site";
 import "./hakkimizda.css";
-import { Clock3, Sparkles, CakeSlice, HeartHandshake } from "lucide-react";
 
-const whyItems = [
-  {
-    title: "1970'den Beri Güven",
-    text: "Yıllara yayılan üretim disiplinimizle güçlü bir güven bağı kuruyoruz.",
-    icon: Clock3,
-  },
-  {
-    title: "Günlük Taze Hazırlık",
-    text: "Her sabah tüm ürünlerimizi taze olarak hazırlıyoruz.",
-    icon: Sparkles,
-  },
-  {
-    title: "Kendi İmalatımız",
-    text: "Ürünlerimizi dışarıdan almıyor, kendi mutfağımızda üretiyoruz.",
-    icon: CakeSlice,
-  },
-  {
-    title: "Samimi Hizmet",
-    text: "Müşterilerimize sıcak ve güvenilir bir hizmet sunuyoruz.",
-    icon: HeartHandshake,
-  },
-];
+export const metadata: Metadata = {
+  title: "Hakkımızda",
+  description: "1970'ten beri Akyazı'da hizmet veren Sarılar Unlu Mamüller'in hikâyesi, günlük hazırlanan ürünleri ve kendi imalatı.",
+  alternates: { canonical: "/hakkimizda" },
+};
 
-export default function Page() {
+const orderHref = whatsappLink("Merhaba, Sipariş verebilir miyim?");
+
+export default function HakkimizdaPage() {
   return (
-    <main className="hak-wrapper">
+    <div className="about-page">
+      <section className="page-intro about-page__intro">
+        <div className="container about-page__hero">
+          <div className="about-page__hero-copy">
+            <span className="eyebrow">Sarılar&apos;ın hikâyesi</span>
+            <h1 className="page-title">1970&apos;ten beri Akyazı&apos;dayız.</h1>
+            <p className="lead">
+              Pasta, tatlı ve fırın ürünlerimizi kendi imalatımızda hazırlıyoruz.
+              Günlük ürünlerimiz ve özel gün siparişlerimiz için Akyazı&apos;daki
+              mağazamızda buluşuyoruz.
+            </p>
+            <div className="about-page__hero-actions">
+              <Link className="button button--dark" href="/menu">
+                Menüyü keşfet <ArrowRight size={17} aria-hidden="true" />
+              </Link>
+              <Link className="button button--light" href="/iletisim">Bize ulaşın</Link>
+            </div>
+          </div>
+          <figure className="about-page__figure">
+            <div className="about-page__photo">
+              <Image
+                src="/images/storefront.jpg"
+                alt="Sarılar Unlu Mamüller'in Akyazı'daki mağazası"
+                fill
+                priority
+                sizes="(max-width: 760px) calc(100vw - 28px), (max-width: 1200px) 48vw, 690px"
+              />
+            </div>
+            <figcaption>Sarılar Unlu Mamüller <span aria-hidden="true">/</span> Akyazı</figcaption>
+          </figure>
+        </div>
+      </section>
 
-      {/* HERO */}
-      <section className="hak-hero">
-
-        <div className="hak-left">
-          <h1 className="hak-title">
-            1970’ten Bugüne <br /> Lezzet Yolculuğu
-          </h1>
-
-          <p className="hak-text">
-            Sarılar Unlu Mamüller olarak Akyazı’da yarım asrı aşkın süredir
-            günlük üretim anlayışıyla hizmet veriyoruz.
-          </p>
-
-          <div className="hak-buttons">
-            <Link href="/menu" className="btn-primary">
-              Menüyü Keşfet
-            </Link>
-            <Link href="/iletisim" className="btn-outline">
-              İletişim
-            </Link>
+      <section className="section about-page__story">
+        <div className="container about-page__story-grid">
+          <div className="about-page__year" aria-label="1970'ten beri Akyazı'da">
+            <strong>{siteConfig.foundingYear}</strong>
+            <span>Akyazı, Sakarya</span>
+          </div>
+          <div className="about-page__story-copy">
+            <SectionTitle eyebrow="Dünden bugüne" title="Aynı şehirde, aynı özenle." />
+            <p>
+              Sarılar&apos;da günlük üretim ve kendi imalatımız işimizin temelini oluşturur.
+              Vitrindeki pastaları, tatlıları ve fırın ürünlerini yakından görmek için
+              mağazamıza uğrayabilirsiniz.
+            </p>
+            <p>
+              Özel gün pastalarında tarih, kişi sayısı ve düşündüğünüz tasarımı
+              konuşarak siparişinizi netleştiriyoruz. Güncel çeşitleri öğrenmek için
+              de doğrudan bize yazabilirsiniz.
+            </p>
           </div>
         </div>
+      </section>
 
-        {/* IMAGE FIX */}
-        <div className="hak-right">
-          <div className="hak-image-wrapper">
-            <Image
-              src="/images/storefront.jpg"
-              alt="Sarılar"
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              priority
-              className="hak-image"
+      <section className="section section--tint about-page__principles">
+        <div className="container">
+          <div className="about-page__principles-head">
+            <SectionTitle
+              eyebrow="Bugün Sarılar"
+              title="Günlük işlerimiz, değişmeyen yaklaşımımız."
+              description="Mağazaya geldiğinizde de sipariş için yazdığınızda da işimizi bu üç şeyin etrafında sürdürüyoruz."
             />
           </div>
-        </div>
-
-      </section>
-
-      {/* STORY */}
-      <section className="hak-story">
-
-        <h2 className="hak-story-title">
-          Geçmişin ustalığı, bugünün özeni
-        </h2>
-
-        <div className="hak-story-grid">
-          <p>
-            1970’ten bu yana değişmeyen tek şey kaliteye olan bağlılığımızdır.
-          </p>
-
-          <p>
-            Doğal malzeme ve günlük üretim prensibiyle üretmeye devam ediyoruz.
-          </p>
-        </div>
-
-        {/* STATS */}
-        <div className="hak-stats">
-          <div>
-            <span>TECRÜBE</span>
-            <strong>50+ Yıl</strong>
-          </div>
-          <div>
-            <span>ÜRETİM</span>
-            <strong>Günlük</strong>
-          </div>
-          <div>
-            <span>MEMNUNİYET</span>
-            <strong>%100</strong>
+          <div className="about-page__values">
+            <article className="about-page__value">
+              <span className="about-page__value-icon"><Clock3 size={23} strokeWidth={1.6} aria-hidden="true" /></span>
+              <span className="about-page__value-number" aria-hidden="true">01</span>
+              <h3>Günlük hazırlık</h3>
+              <p>Pastalarımız, tatlılarımız ve fırın ürünlerimiz için günlük üretime önem veriyoruz.</p>
+            </article>
+            <article className="about-page__value">
+              <span className="about-page__value-icon"><Wheat size={23} strokeWidth={1.6} aria-hidden="true" /></span>
+              <span className="about-page__value-number" aria-hidden="true">02</span>
+              <h3>Kendi imalatımız</h3>
+              <p>Vitrindeki lezzetlerden özel gün pastalarına kadar üretimi kendi bünyemizde yürütüyoruz.</p>
+            </article>
+            <article className="about-page__value">
+              <span className="about-page__value-icon"><MessageCircle size={23} strokeWidth={1.6} aria-hidden="true" /></span>
+              <span className="about-page__value-number" aria-hidden="true">03</span>
+              <h3>Doğrudan iletişim</h3>
+              <p>Ürün seçimini, sipariş tarihini ve teslimat ayrıntılarını sizinle konuşuyoruz.</p>
+            </article>
           </div>
         </div>
-
       </section>
 
-      {/* WHY */}
-      <section className="hak-why">
-
-        <h2 className="hak-why-title">Neden Biz?</h2>
-
-        <div className="hak-why-grid">
-          {whyItems.map((item, i) => {
-            const Icon = item.icon;
-
-            return (
-              <div key={i} className="hak-card">
-                <div className="hak-icon">
-                  <Icon size={20} />
-                </div>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </div>
-            );
-          })}
+      <section className="section about-page__visit">
+        <div className="container about-page__visit-inner">
+          <div>
+            <span className="eyebrow">Akyazı&apos;da bekleriz</span>
+            <h2>Mağazada görüşelim.</h2>
+            <p>Uğramadan önce güncel ürünleri sorabilir veya yol tarifine bakabilirsiniz.</p>
+          </div>
+          <div className="about-page__visit-actions">
+            <a href={siteConfig.mapsUrl} target="_blank" rel="noopener noreferrer" className="button button--dark">
+              <MapPin size={17} aria-hidden="true" /> Yol tarifi
+            </a>
+            <a href={orderHref} target="_blank" rel="noopener noreferrer" className="button button--light">
+              <MessageCircle size={17} aria-hidden="true" /> WhatsApp&apos;tan yaz
+            </a>
+          </div>
         </div>
-
       </section>
-
-    </main>
+    </div>
   );
 }

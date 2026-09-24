@@ -1,0 +1,438 @@
+/* Homepage opening: one quiet message, four real product photographs. */
+.sarilar-hero {
+  --hero-ink: #302219;
+  --hero-muted: #685b50;
+  --hero-gold: #8d602f;
+
+  overflow: hidden;
+  border-bottom: 1px solid #e9dfd2;
+  background: #fffcf7;
+  color: var(--hero-ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.sarilar-hero *,
+.sarilar-hero *::before,
+.sarilar-hero *::after,
+.sarilar-hero__trust *,
+.sarilar-hero__trust *::before,
+.sarilar-hero__trust *::after {
+  box-sizing: border-box;
+}
+
+.sarilar-hero a { text-decoration: none; }
+.sarilar-hero button { font: inherit; cursor: pointer; }
+
+.sarilar-hero a:focus-visible,
+.sarilar-hero button:focus-visible {
+  outline: 2px solid #9a6834;
+  outline-offset: 4px;
+}
+
+.sarilar-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, .91fr) minmax(0, 1.09fr);
+  grid-template-rows: auto auto;
+  align-items: center;
+  column-gap: clamp(40px, 6vw, 86px);
+  padding-block: clamp(52px, 6vw, 82px);
+}
+
+.sarilar-hero__intro {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: end;
+  min-width: 0;
+}
+
+.sarilar-hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  color: var(--hero-gold);
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: .15em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.sarilar-hero__eyebrow::before {
+  content: "";
+  flex: none;
+  width: 27px;
+  height: 1px;
+  background: currentColor;
+}
+
+.sarilar-hero__title {
+  max-width: 12ch;
+  margin: 19px 0 0;
+  font-family: Georgia, Cambria, "Times New Roman", serif;
+  font-size: clamp(48px, 5.3vw, 73px);
+  font-weight: 400;
+  letter-spacing: -.052em;
+  line-height: 1.055;
+  text-wrap: balance;
+}
+
+.sarilar-hero__title em {
+  display: block;
+  color: #875c30;
+  font-weight: 400;
+}
+
+.sarilar-hero__details {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: start;
+  min-width: 0;
+}
+
+.sarilar-hero__lead {
+  max-width: 47ch;
+  margin: 24px 0 0;
+  color: var(--hero-muted);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.sarilar-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.sarilar-hero__menu-link,
+.sarilar-hero__order-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 51px;
+  padding: 12px 20px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 720;
+  line-height: 1.2;
+  white-space: nowrap;
+  transition: background-color .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.sarilar-hero__menu-link {
+  background: #30221b;
+  color: #fffaf3;
+}
+
+.sarilar-hero__order-link {
+  border-color: #d2c0aa;
+  background: transparent;
+  color: #443225;
+}
+
+.sarilar-hero__menu-link svg,
+.sarilar-hero__order-link svg { flex: none; }
+
+.sarilar-hero__note {
+  max-width: 52ch;
+  margin: 20px 0 0;
+  color: #827369;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+/* The entire image surface changes; manual controls stay visible. */
+.sarilar-hero__showcase {
+  position: relative;
+  grid-column: 2;
+  grid-row: 1 / 3;
+  align-self: center;
+  min-width: 0;
+}
+
+.sarilar-hero__media {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  aspect-ratio: 1.19 / 1;
+  overflow: hidden;
+  border-radius: 15px;
+  background: #e9d9c6;
+  box-shadow: 0 22px 50px rgba(49, 34, 22, .13);
+  touch-action: pan-y;
+}
+
+.sarilar-hero__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .65s ease;
+}
+
+.sarilar-hero__slide[data-active="true"] { opacity: 1; }
+
+.sarilar-hero__slide img {
+  object-fit: cover;
+  object-position: center;
+}
+
+.sarilar-hero__media::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 42% 0 0;
+  background: linear-gradient(180deg, transparent, rgba(20, 12, 8, .76));
+  pointer-events: none;
+}
+
+.sarilar-hero__photo-caption {
+  position: absolute;
+  z-index: 2;
+  inset: auto auto 25px 26px;
+  max-width: calc(100% - 145px);
+  color: #fffaf2;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, .3);
+}
+
+.sarilar-hero__photo-count {
+  display: block;
+  margin-bottom: 9px;
+  color: #f2d8aa;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  line-height: 1;
+}
+
+.sarilar-hero__photo-caption p {
+  margin: 0;
+  font-family: Georgia, Cambria, "Times New Roman", serif;
+  font-size: clamp(23px, 2.4vw, 33px);
+  font-weight: 400;
+  letter-spacing: -.035em;
+  line-height: 1.14;
+  text-wrap: balance;
+}
+
+.sarilar-hero__arrows {
+  position: absolute;
+  z-index: 3;
+  right: 20px;
+  bottom: 22px;
+  display: flex;
+  gap: 8px;
+}
+
+.sarilar-hero__arrows button {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, .72);
+  border-radius: 50%;
+  background: rgba(31, 21, 15, .42);
+  color: #ffffff;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background-color .2s ease, transform .2s ease;
+}
+
+.sarilar-hero__arrows button:focus-visible {
+  outline-color: #ffffff;
+}
+
+.sarilar-hero__thumb-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.sarilar-hero__thumb-heading {
+  color: #8a7160;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.sarilar-hero__thumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sarilar-hero__thumb {
+  position: relative;
+  flex: none;
+  width: 62px;
+  height: 62px;
+  padding: 0;
+  overflow: hidden;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background: #e7d9c9;
+  opacity: .65;
+  transition: opacity .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.sarilar-hero__thumb img { object-fit: cover; }
+
+.sarilar-hero__thumb[data-active="true"] {
+  border-color: #9b6936;
+  opacity: 1;
+}
+
+.sarilar-hero__screen-reader {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Three useful facts without decorative cards. */
+.sarilar-hero__trust {
+  border-bottom: 1px solid #e6dacb;
+  background: #f5efe6;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.sarilar-hero__trust-inner {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.sarilar-hero__trust-item {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-width: 0;
+  padding: 19px clamp(16px, 2.2vw, 28px);
+  color: #7c6a5b;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.sarilar-hero__trust-item:first-child { padding-left: 0; }
+.sarilar-hero__trust-item:not(:last-child) { border-right: 1px solid #dfd1bf; }
+
+.sarilar-hero__trust-item svg {
+  flex: none;
+  color: #966636;
+}
+
+.sarilar-hero__trust-item span { display: grid; gap: 2px; }
+.sarilar-hero__trust-item strong {
+  color: #32231a;
+  font-size: 13px;
+  font-weight: 680;
+}
+
+@media (hover: hover) {
+  .sarilar-hero__menu-link:hover {
+    transform: translateY(-2px);
+    background: #4a3223;
+  }
+
+  .sarilar-hero__order-link:hover {
+    transform: translateY(-2px);
+    border-color: #9f774e;
+    background: #f5ebdf;
+  }
+
+  .sarilar-hero__arrows button:hover {
+    transform: translateY(-2px);
+    background: rgba(31, 21, 15, .76);
+  }
+
+  .sarilar-hero__thumb:hover { opacity: 1; }
+}
+
+@media (max-width: 900px) {
+  .sarilar-hero__grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    padding-block: 49px 57px;
+  }
+
+  .sarilar-hero__intro,
+  .sarilar-hero__showcase,
+  .sarilar-hero__details {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .sarilar-hero__title { max-width: 15ch; }
+  .sarilar-hero__showcase { margin-top: 30px; }
+  .sarilar-hero__media { aspect-ratio: 1.5 / 1; }
+  .sarilar-hero__details { margin-top: 28px; }
+  .sarilar-hero__lead { max-width: 65ch; margin-top: 0; }
+}
+
+@media (max-width: 600px) {
+  .sarilar-hero__trust-inner { grid-template-columns: 1fr; }
+
+  .sarilar-hero__trust-item,
+  .sarilar-hero__trust-item:first-child {
+    min-height: 66px;
+    padding: 13px 2px;
+  }
+
+  .sarilar-hero__trust-item:not(:last-child) {
+    border-right: 0;
+    border-bottom: 1px solid #dfd1bf;
+  }
+}
+
+@media (max-width: 540px) {
+  .sarilar-hero__grid { padding-block: 37px 49px; }
+  .sarilar-hero__title { max-width: 12ch; margin-top: 16px; font-size: clamp(43px, 10vw, 53px); }
+  .sarilar-hero__showcase { margin-top: 24px; }
+  .sarilar-hero__media { aspect-ratio: 1.13 / 1; border-radius: 12px; }
+  .sarilar-hero__photo-caption { left: 18px; bottom: 19px; max-width: calc(100% - 133px); }
+  .sarilar-hero__photo-caption p { font-size: 23px; }
+  .sarilar-hero__photo-count { margin-bottom: 6px; font-size: 10px; }
+  .sarilar-hero__arrows { right: 14px; bottom: 16px; gap: 7px; }
+  .sarilar-hero__arrows button { width: 44px; height: 44px; }
+  .sarilar-hero__thumb-bar { justify-content: center; margin-top: 13px; }
+  .sarilar-hero__thumb-heading { display: none; }
+  .sarilar-hero__thumb { width: 56px; height: 56px; border-radius: 9px; }
+  .sarilar-hero__details { margin-top: 25px; }
+  .sarilar-hero__lead { font-size: 14px; line-height: 1.7; }
+  .sarilar-hero__actions { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 23px; }
+  .sarilar-hero__menu-link,
+  .sarilar-hero__order-link { width: 100%; min-height: 50px; }
+  .sarilar-hero__note { margin-top: 18px; }
+}
+
+@media (max-width: 340px) {
+  .sarilar-hero__title { font-size: 41px; }
+  .sarilar-hero__photo-caption p { font-size: 21px; }
+  .sarilar-hero__thumb { width: 50px; height: 50px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sarilar-hero *,
+  .sarilar-hero *::before,
+  .sarilar-hero *::after {
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+  }
+
+  .sarilar-hero__menu-link:hover,
+  .sarilar-hero__order-link:hover,
+  .sarilar-hero__arrows button:hover { transform: none; }
+}

@@ -1,0 +1,190 @@
+/* Editorial product tiles for the Sarılar collection. */
+.sarilar-product-card {
+  --pc-ink: #302219;
+  --pc-muted: #6c6055;
+  --pc-gold: #795125;
+
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+  color: var(--pc-ink);
+  background: transparent;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  text-decoration: none;
+}
+
+.sarilar-product-card *,
+.sarilar-product-card *::before,
+.sarilar-product-card *::after {
+  box-sizing: border-box;
+}
+
+.sarilar-product-card:focus-visible {
+  border-radius: 3px;
+  outline: 3px solid #9b6831;
+  outline-offset: 4px;
+}
+
+.sarilar-product-card__media {
+  position: relative;
+  flex: none;
+  width: 100%;
+  min-width: 0;
+  aspect-ratio: 1.15 / 1;
+  overflow: hidden;
+  border-radius: 15px;
+  background: #e9dece;
+  box-shadow: 0 7px 21px rgba(41, 29, 20, .07);
+  transition: box-shadow .35s ease;
+}
+
+.sarilar-product-card__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255, 255, 255, .38);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.sarilar-product-card__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform .55s cubic-bezier(.2, .7, .25, 1);
+}
+
+.sarilar-product-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  padding: 18px 3px 0;
+}
+
+.sarilar-product-card__category {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  align-self: flex-start;
+  max-width: 100%;
+  color: var(--pc-gold);
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: .095em;
+  line-height: 1.35;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.sarilar-product-card__category::before {
+  content: "";
+  flex: none;
+  width: 20px;
+  height: 1px;
+  background: #bc8d51;
+}
+
+.sarilar-product-card__title {
+  margin: 10px 0 0;
+  color: var(--pc-ink);
+  font-family: Georgia, Cambria, "Times New Roman", serif;
+  font-size: clamp(24px, 1.9vw, 28px);
+  font-weight: 400;
+  letter-spacing: -.036em;
+  line-height: 1.15;
+  text-wrap: balance;
+  transition: color .2s ease;
+}
+
+.sarilar-product-card__description {
+  margin: 11px 0 0;
+  color: var(--pc-muted);
+  font-size: 13.5px;
+  line-height: 1.62;
+}
+
+.sarilar-product-card__action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  padding: 17px 0 2px;
+  border-top: 1px solid #ddd0bf;
+  color: #60401f;
+  font-size: 12px;
+  font-weight: 780;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.sarilar-product-card__action svg {
+  flex: none;
+  transition: transform .25s ease;
+}
+
+@supports selector(:has(*)) {
+  .product-grid:has(> .sarilar-product-card) {
+    column-gap: clamp(18px, 2vw, 27px);
+    row-gap: clamp(28px, 3vw, 38px);
+  }
+}
+
+@media (hover: hover) {
+  .sarilar-product-card:hover .sarilar-product-card__media {
+    box-shadow: 0 16px 32px rgba(41, 29, 20, .15);
+  }
+
+  .sarilar-product-card:hover .sarilar-product-card__image {
+    transform: scale(1.045);
+  }
+
+  .sarilar-product-card:hover .sarilar-product-card__title {
+    color: #76502a;
+  }
+
+  .sarilar-product-card:hover .sarilar-product-card__action svg {
+    transform: translateX(4px);
+  }
+}
+
+.sarilar-product-card:focus-visible .sarilar-product-card__action svg {
+  transform: translateX(4px);
+}
+
+@media (max-width: 1000px) {
+  .sarilar-product-card__media { aspect-ratio: 4 / 3; }
+}
+
+@media (max-width: 540px) {
+  .sarilar-product-card__media { aspect-ratio: 5 / 4; }
+  .sarilar-product-card__body { padding: 19px 2px 0; }
+  .sarilar-product-card__title { font-size: clamp(26px, 7vw, 31px); }
+  .sarilar-product-card__description { font-size: 14px; }
+  .sarilar-product-card__action { padding-top: 17px; }
+}
+
+@media (max-width: 380px) {
+  .sarilar-product-card__media { border-radius: 13px; }
+  .sarilar-product-card__category { font-size: 10px; }
+  .sarilar-product-card__title { font-size: 25px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sarilar-product-card *,
+  .sarilar-product-card *::before,
+  .sarilar-product-card *::after {
+    transition-duration: .01ms !important;
+  }
+
+  .sarilar-product-card:hover .sarilar-product-card__image,
+  .sarilar-product-card:hover .sarilar-product-card__action svg,
+  .sarilar-product-card:focus-visible .sarilar-product-card__action svg {
+    transform: none;
+  }
+}

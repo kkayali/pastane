@@ -1,81 +1,105 @@
 import Image from "next/image";
-import { ornamentalScript } from "@/app/fonts";
+import Link from "next/link";
+import { ArrowRight, MessageCircle } from "lucide-react";
+import SectionTitle from "@/components/SectionTitle";
+import { whatsappLink } from "@/data/site";
+import "./EditorialShowcase.css";
 
-const items = [
-  {
-    image: "/images/menu/pastalar/meyvelipasta1.jpeg",
-    eyebrow: "Ozel tasarim • Zarif sunum",
-    title: "Lezzet ve zarafetin\nen tatli hali",
-    text: "Her detayinda ozen, her lokmada mutluluk hissi veren secili pasta sunumlari.",
-  },
-  {
-    image: "/images/menu/sutlu-tatlilar/magnolya1.jpeg",
-    eyebrow: "Gunluk taze • Hafif tercih",
-    title: "Gunluk tazeligin\nen saf hali",
-    text: "Hafif, dengeli ve gunun her aninda keyifle tercih edilen taze tatlilar.",
-    reverse: true,
-  },
-  {
-    image: "/images/menu/dugun-nisan/dugun-nisan.jpeg",
-    eyebrow: "Butik cizgi • Ozel gunler",
-    title: "Guzel sunumlarin\nen ozel dokunusu",
-    text: "Dugun, nisan ve kutlamalara zarif gorunum katan ozenli hazirlik anlayisi.",
-  },
-];
+const specialOrderHref = whatsappLink(
+  "Merhaba, özel gün için pasta yaptırmak istiyorum. Tasarım ve teslim tarihini görüşebilir miyiz?",
+);
 
 export default function EditorialShowcase() {
   return (
-    <section className="section pt-0">
-      <div className="container-custom">
-        <div className="space-y-12 sm:space-y-16 lg:space-y-24">
-          {items.map((item) => (
-            <div
-              key={item.title}
-              className={`grid items-center gap-8 lg:grid-cols-[1fr_0.9fr] lg:gap-14 ${
-                item.reverse
-                  ? "lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1"
-                  : ""
-              }`}
-            >
-              <div className="relative overflow-hidden rounded-[30px] border border-[var(--line)] bg-[rgba(255,250,244,0.78)] p-2 shadow-[var(--shadow-medium)] sm:rounded-[34px] sm:p-3">
-                <div className="relative h-[320px] overflow-hidden rounded-[24px] bg-[#f8eee2] sm:h-[430px] sm:rounded-[28px] lg:h-[520px]">
-                  <Image
-                    src={item.image}
-                    alt={item.title.replace(/\n/g, " ")}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover transition duration-700 hover:scale-[1.03]"
-                    loading="eager"
-                  />
-                </div>
+    <div className="sarilar-editorial">
+      <section className="sarilar-editorial__story">
+        <div className="container sarilar-editorial__story-inner">
+          <div className="sarilar-editorial__story-heading">
+            <SectionTitle eyebrow="Hikâyemiz" title="Akyazı'da, 1970'ten beri." />
+          </div>
+
+          <figure className="sarilar-editorial__story-figure">
+            <div className="sarilar-editorial__story-image">
+              <Image
+                src="/images/storefront.jpg"
+                alt="Sarılar Unlu Mamüller mağazası"
+                fill
+                sizes="(max-width: 760px) calc(100vw - 28px), (max-width: 1200px) 46vw, 555px"
+              />
+            </div>
+            <figcaption className="sarilar-editorial__caption">
+              Sarılar Unlu Mamüller <span aria-hidden="true">/</span> Akyazı
+            </figcaption>
+          </figure>
+
+          <div className="sarilar-editorial__story-content">
+            <p className="sarilar-editorial__story-text">
+              1970&apos;ten bu yana Akyazı&apos;da, kendi imalatımızdan çıkan
+              ürünleri günlük hazırlıyoruz. Mağazamızı ve hikâyemizi daha
+              yakından tanıyın.
+            </p>
+
+            <div className="sarilar-editorial__facts">
+              <div className="sarilar-editorial__fact">
+                <strong>1970&apos;ten beri</strong>
+                <span>Akyazı&apos;da</span>
               </div>
-
-              <div
-                className={`overflow-visible px-2 sm:px-4 ${
-                  item.reverse ? "lg:pr-8 lg:pl-2" : "lg:pl-8 lg:pr-2"
-                }`}
-              >
-                {/* siyah içindeki küçük üst yazı */}
-                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--text-muted)] sm:text-[11px]">
-                  {item.eyebrow}
-                </p>
-
-                {/* mavi içindeki büyük script başlık */}
-                <h2
-                  className={`${ornamentalScript.className} relative top-2 mt-10 max-w-[500px] whitespace-pre-line text-[3.2rem] leading-[1.1] text-[var(--primary)] sm:top-3 sm:text-[4.2rem] lg:top-4 lg:max-w-[560px] lg:text-[5.4rem]`}
-                >
-                  {item.title}
-                </h2>
-
-                {/* kırmızı içindeki açıklama */}
-                <p className="mt-10 max-w-[32rem] text-[14.5px] leading-7 text-[var(--text-soft)] sm:text-[15.5px] sm:leading-8">
-                  {item.text}
-                </p>
+              <div className="sarilar-editorial__fact">
+                <strong>Kendi imalatımız</strong>
+                <span>Günlük hazırlanan ürünler</span>
               </div>
             </div>
-          ))}
+
+            <Link href="/hakkimizda" className="sarilar-editorial__story-link">
+              Hikâyemizi oku
+              <ArrowRight size={18} strokeWidth={1.7} aria-hidden="true" />
+            </Link>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <section className="sarilar-editorial__occasion">
+        <div className="container sarilar-editorial__occasion-inner">
+          <div className="sarilar-editorial__occasion-copy">
+            <SectionTitle
+              eyebrow="Özel gün siparişleri"
+              title="Kutlamanız için özenle hazırlansın."
+              description="Doğum günü, düğün ve nişan pastaları için tarih, kişi sayısı ve düşündüğünüz tasarımı paylaşın. Seçenekleri birlikte netleştirelim."
+              light
+            />
+
+            <div className="sarilar-editorial__occasion-actions">
+              <a
+                href={specialOrderHref}
+                className="sarilar-editorial__order-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <MessageCircle size={19} strokeWidth={1.8} aria-hidden="true" />
+                WhatsApp&apos;tan yaz
+              </a>
+              <Link href="/menu/dugun-nisan" className="sarilar-editorial__menu-link">
+                Düğün ve nişan pastaları
+                <ArrowRight size={18} strokeWidth={1.7} aria-hidden="true" />
+              </Link>
+            </div>
+          </div>
+
+          <figure className="sarilar-editorial__occasion-figure">
+            <div className="sarilar-editorial__occasion-image">
+              <Image
+                src="/images/menu/dugun-nisan/dugun-nisan.jpeg"
+                alt="Sarılar düğün ve nişan pastası"
+                fill
+                sizes="(max-width: 760px) calc(100vw - 28px), (max-width: 1200px) 44vw, 530px"
+              />
+            </div>
+            <figcaption className="sarilar-editorial__caption sarilar-editorial__caption--light">
+              Özel gün pastaları <span aria-hidden="true">/</span> Sarılar
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+    </div>
   );
 }

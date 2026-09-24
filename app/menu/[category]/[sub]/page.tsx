@@ -1,130 +1,121 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowDown, ArrowLeft, MessageCircle } from "lucide-react";
 import { notFound } from "next/navigation";
-import ScriptText from "@/components/ScriptText";
-import { ArrowLeft } from "lucide-react";
-import { findSubcategoryBySlugs, menuCategories } from "@/data/menu";
+import JsonLd from "@/components/JsonLd";
+import ProductGallery from "@/components/ProductGallery";
+import { findSubcategoryBySlugs, getSubcategoryDisplayImage, menuCategories } from "@/data/menu";
+import { productWhatsappMessage } from "@/data/messages";
+import { siteConfig, whatsappLink } from "@/data/site";
+import "./sub.css";
 
-type PageProps = {
-  params: Promise<{
-    category: string;
-    sub: string;
-  }>;
-};
+type Props = { params: Promise<{ category: string; sub: string }> };
 
-export async function generateStaticParams() {
-  return menuCategories.flatMap((category) =>
-    category.subcategories.map((sub) => ({
-      category: category.slug,
-      sub: sub.slug,
-    }))
-  );
+export function generateStaticParams() {
+  return menuCategories.flatMap((category) => category.subcategories.map((sub) => ({
+    category: category.slug,
+    sub: sub.slug,
+  })));
 }
 
-export default async function SubcategoryPage({ params }: PageProps) {
-  const { category: categorySlug, sub: subSlug } = await params;
-  const result = findSubcategoryBySlugs(categorySlug, subSlug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { category: catSlug, sub: subSlug } = await params;
+  const found = findSubcategoryBySlugs(catSlug, subSlug);
+  if (!found) return {};
+  return {
+    title: `${found.subcategory.title} | ${found.category.title}`,
+    description: found.subcategory.description,
+    alternates: { canonical: `/menu/${catSlug}/${subSlug}` },
+  };
+}
 
-  if (!result) notFound();
+export default async function SubcategoryPage({ params }: Props) {
+  const { category: catSlug, sub: subSlug } = await params;
+  const found = findSubcategoryBySlugs(catSlug, subSlug);
+  if (!found) notFound();
 
-  const { category, subcategory } = result;
-  const preview = subcategory.images[0] || category.coverImage || "";
+  const { category, subcategory } = found;
+  const media = getSubcategoryDisplayImage(subcategory, category);
+  const whatsappMessage = productWhatsappMessage(catSlug, subSlug);
+  const breadcrumbs = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Ana Sayfa", item: siteConfig.siteUrl },
+      { "@type": "ListItem", position: 2, name: "Menü", item: `${siteConfig.siteUrl}/menu` },
+      { "@type": "ListItem", position: 3, name: category.title, item: `${siteConfig.siteUrl}/menu/${catSlug}` },
+      { "@type": "ListItem", position: 4, name: subcategory.title, item: `${siteConfig.siteUrl}/menu/${catSlug}/${subSlug}` },
+    ],
+  };
 
   return (
-    <main className="overflow-hidden bg-[#FCFAF7] pb-24 sm:pb-32">
-      {/* ÜST BÖLÜM (HERO KAPAĞI) */}
-      <section className="relative pt-8 sm:pt-16 lg:pt-20">
-        <div className="container-custom">
-          {/* Geri Dön Butonu - Minimal ve Şık */}
-          <Link
-            href={`/menu/${category.slug}`}
-            className="mb-6 inline-flex items-center gap-2 text-[14px] font-bold text-[var(--text-soft)] transition-colors hover:text-[var(--primary)]"
-          >
-            <ArrowLeft size={16} />
-            {category.title} Kategorisine Dön
-          </Link>
-
-          <div className="relative overflow-hidden rounded-[32px] sm:rounded-[48px] bg-[#3D1C08] shadow-[0_30px_90px_rgba(84,45,20,0.15)]">
-            {preview && (
-              <div className="absolute inset-0 z-0">
-                <Image
-                  src={preview}
-                  alt={subcategory.title}
-                  fill
-                  priority
-                  className="object-cover opacity-50 mix-blend-overlay"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#3D1C08] via-[#3D1C08]/80 to-transparent" />
+    <div className="subcategory-page">
+      <JsonLd data={breadcrumbs} />
+      <section className="page-intro subcategory-page__intro">
+        <div className="container">
+          <nav className="breadcrumbs subcategory-page__breadcrumbs" aria-label="Sayfa yolu">
+            <Link href="/">Ana Sayfa</Link>
+            <span aria-hidden="true">/</span>
+            <Link href="/menu">Menü</Link>
+            <span aria-hidden="true">/</span>
+            <Link href={`/menu/${catSlug}`}>{category.title}</Link>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">{subcategory.title}</span>
+          </nav>
+          <div className="subcategory-page__hero">
+            <div className="subcategory-page__hero-copy">
+              <span className="eyebrow">{category.title}</span>
+              <h1 className="page-title">{subcategory.title}</h1>
+              <p className="lead">{subcategory.description}</p>
+              <div className="subcategory-page__hero-actions">
+                <a
+                  className="button button--green"
+                  href={whatsappLink(whatsappMessage)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <MessageCircle size={18} aria-hidden="true" /> Sipariş için yaz
+                </a>
+                <a className="subcategory-page__gallery-jump" href="#galeri">
+                  Fotoğrafları incele <ArrowDown size={17} aria-hidden="true" />
+                </a>
               </div>
-            )}
-
-            <div className="relative z-10 flex min-h-[350px] flex-col items-center justify-center px-6 py-16 text-center sm:min-h-[450px] sm:px-12 lg:min-h-[500px]">
-              <div className="inline-flex items-center gap-3">
-                <span className="h-px w-8 bg-[#C27E48]" />
-                <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#C27E48]">
-                  {category.title}
-                </p>
-                <span className="h-px w-8 bg-[#C27E48]" />
-              </div>
-
-              <h1 className="mt-6 max-w-[15ch] font-title text-[3rem] font-bold leading-[1.05] tracking-[-0.02em] text-white text-balance sm:text-[4rem] lg:text-[5rem]">
-                {subcategory.title}
-              </h1>
-
-              <p className="mt-6 max-w-[50ch] text-[16px] font-medium leading-[1.9] text-white/80 sm:text-[18px]">
-                {subcategory.description}
-              </p>
+              <p className="subcategory-page__availability">Güncel çeşit ve sipariş ayrıntılarını mesajla öğrenebilirsiniz.</p>
+            </div>
+            <div className="subcategory-page__cover">
+              <Image
+                src={media.src}
+                alt={media.alt}
+                fill
+                priority
+                sizes="(max-width: 760px) calc(100vw - 28px), (max-width: 1320px) 50vw, 650px"
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* ÜRÜN GALERİSİ */}
-      <section className="relative mt-20 sm:mt-28 lg:mt-32">
-        <div className="container-custom">
-          {subcategory.images.length > 0 ? (
-            <>
-              <div className="mb-12 flex items-center justify-between sm:mb-16">
-                <div>
-                  <ScriptText className="text-[2rem] text-[var(--primary)] opacity-90 sm:text-[2.6rem]">
-                    Lezzet Galerisi
-                  </ScriptText>
-                  <h2 className="mt-2 font-title text-[2.2rem] leading-[1.1] text-[var(--primary-dark)] sm:text-[2.8rem]">
-                    Örnek Sunumlarımız
-                  </h2>
-                </div>
-              </div>
-
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-10">
-                {subcategory.images.map((image, index) => (
-                  <div
-                    key={`${image}-${index}`}
-                    className="group relative overflow-hidden rounded-[28px] sm:rounded-[36px] bg-[#F8EEE2] shadow-sm transition-all duration-700 hover:shadow-[0_20px_40px_rgba(84,45,20,0.12)] hover:-translate-y-1.5 aspect-[4/5]"
-                  >
-                    <Image
-                      src={image}
-                      alt={`${subcategory.title} görseli ${index + 1}`}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 33vw"
-                      className="object-cover transition-transform duration-[1.5s] group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--primary-dark)]/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                  </div>
-                ))}
-              </div>
-            </>
-          ) : (
-            <div className="mx-auto max-w-3xl rounded-[40px] bg-[#FDF8F3] px-8 py-16 text-center border border-[rgba(133,80,44,0.06)] sm:px-16 sm:py-24">
-              <ScriptText className="text-[2.4rem] text-[var(--primary)] opacity-90 sm:text-[3rem]">
-                Görseller Hazırlanıyor
-              </ScriptText>
-              <p className="mx-auto mt-6 max-w-2xl text-[16px] leading-[1.9] text-[var(--text-soft)] sm:text-[17.5px]">
-                Bu alt kategori için henüz ürün görsellerini stüdyoya almadık. Çekimler tamamlandığında bu alan iştah açıcı bir galeriye dönüşecek.
-              </p>
+      <section id="galeri" className="section subcategory-page__gallery">
+        <div className="container">
+          <div className="subcategory-page__gallery-head">
+            <div>
+              <span className="eyebrow">Galeri</span>
+              <h2 className="section-title">{subcategory.title}</h2>
             </div>
-          )}
+            <p>Fotoğrafa dokunarak büyütün; merak ettiklerinizi doğrudan sorun.</p>
+          </div>
+          <ProductGallery
+            title={subcategory.title}
+            images={subcategory.images}
+            fallbackImage={media}
+            whatsappMessage={whatsappMessage}
+          />
+          <Link href={`/menu/${catSlug}`} className="subcategory-page__back">
+            <ArrowLeft size={17} aria-hidden="true" /> {category.title} kategorisine dön
+          </Link>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
